@@ -19,4 +19,4 @@ Principais features:
 ## Tecnologias
 Front-end: React, HTML, Sass;
 
-Back-end: Python;
+Back-end: Python (Flask), SQLite;
