@@ -11,7 +11,7 @@ Objetivo do Sistema: Corretora de Investimento
 
 Principais features:
 - Abertura de conta
-- Compra de ações
+- Compra de ativos 
 - Consulta à carteira de investimentos
 - Simulações de investimentos
 - Empréstimos para investimento alavancado
