@@ -7,7 +7,8 @@ Repositório destinado ao desenvolvimento do trabalho prático da disciplina de 
 - Pedro Renato Ferreira da Silva (Front-end)
 
 ## Escopo
-Objetivo do Sistema: Corretora de Investimento;
+Objetivo do Sistema: Corretora de Investimento
+
 Principais features:
 - Abertura de conta
 - Compra de ações
