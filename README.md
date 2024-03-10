@@ -7,5 +7,5 @@ Repositório destinado ao desenvolvimento do trabalho prático da disciplina de 
 - Pedro Renato Ferreira da Silva (Front-end)
 
 ## Tecnologias
-Front-end: React, HTML, Sass
-Back-end: Python
+- Front-end: React, HTML, Sass
+- Back-end: Python
