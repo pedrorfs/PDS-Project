@@ -20,3 +20,4 @@ Principais features:
 Front-end: React, HTML, Sass;
 
 Back-end: Python (Flask), SQLite;
+
