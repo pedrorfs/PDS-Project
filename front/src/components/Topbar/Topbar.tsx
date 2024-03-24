@@ -8,13 +8,13 @@ export default function Topbar() {
     return (
         <div className="topbar">
             <div className="topbar__logo">
-                <img src={Logo} alt="" srcset="" />
+                <img src={Logo} alt="" />
             </div>
             <div className="topbar__profile">
                 <div className="topbar__profile__name">
                     <h3>Fulano de Tal</h3>
                 </div>
-                <img className="topbar__avatar" src={Avatar} alt="" srcset="" />
+                <img className="topbar__avatar" src={Avatar} alt=""  />
             </div>
         </div>
     )
