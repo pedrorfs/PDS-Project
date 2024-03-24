@@ -5,6 +5,11 @@ $secondary-color: #2623AC;
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     background-color: $primary-color;
+    height: 100%;
+}
+
+#root {
+    height: 100%;
 }
 
 * {
@@ -15,4 +20,8 @@ $secondary-color: #2623AC;
 
 .btn-primary {
     color: $secondary-color;
+}
+
+body {
+    height: 100vh;
 }

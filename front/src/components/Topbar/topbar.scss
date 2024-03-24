@@ -1,0 +1,23 @@
+.topbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4rem;
+    height: 60px;
+
+    &__profile {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 18px;
+    }
+
+    &__avatar {
+        height: 35px;
+    }
+
+    &__avatar:hover {
+        cursor: pointer;
+    }
+}
