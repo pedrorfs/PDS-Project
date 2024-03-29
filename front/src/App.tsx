@@ -13,7 +13,6 @@ function App() {
             <Topbar />
             <div className="default-page__bottom">
                 <Sidebar />
-                {/* <Home /> */}
                 <Outlet />
             </div>
         </div>

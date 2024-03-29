@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import App from './App.tsx';
 import Home from './components/Home/Home.tsx';
 import Login from './pages/Login/Login.tsx';
+import InvestOptions from './pages/InvestOptions/InvestOptions.tsx';
 import DefaultPage from './pages/Default/DefaultPage.tsx';
 
 import './style.scss'
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Route path='/login' element={<Login />} />
         <Route element={<App />}>
           <Route path='/' element={<Home />} />
+          <Route path='/investir' element={<InvestOptions />} />
         </Route>
       </Routes>
     </BrowserRouter>
