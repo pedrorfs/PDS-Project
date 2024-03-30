@@ -11,6 +11,21 @@ import { StockOption } from "../../components/StockOption/StockOption";
 
 import "./InvestList.scss"
 
+const stocks = [
+  {
+    id: "1",
+    title: "Vale",
+    name: "VALE3",
+    price: "59,76",
+  },
+  {
+    id: "2",
+    title: "Vale",
+    name: "VALE3",
+    price: "59,76",
+  }
+]
+
 export function InvestList() {
 
   const [isSelectedETF, setIsSelectedETF] = useState(false)
@@ -79,8 +94,17 @@ export function InvestList() {
       </div>
 
       <div className="list-container__stocks">
-        <StockOption />
-        <StockOption />
+        {stocks.map(stock => {
+          return (
+            <StockOption
+              key={stock.id}
+              id={stock.id}
+              title={stock.title}
+              name={stock.name}
+              price={stock.price}
+            />
+          )
+        })}
       </div>
     </div>
   )
