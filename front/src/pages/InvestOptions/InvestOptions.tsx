@@ -1,9 +1,13 @@
+import { useNavigate } from "react-router-dom"
+
 import BankIcon from "../../assets/BankIcon.svg"
 import Seta from "../../assets/Seta.png"
 
 import "./InvestOptions.scss"
 
 export default function InvestOptions() {
+
+  const navigate = useNavigate()
 
   return (
     <div className="options-container">
@@ -24,7 +28,7 @@ export default function InvestOptions() {
         <h3>Bolsa de Valores</h3>
         <p>Opções com maior potencial de ganho e, também, maior risco. Aqui você investe em Fundos Imobiliários (FIIs), ações brasileiras, estrangeiras (BDRs) e fundos de Índice (ETFs).</p>
         <div className="options-container__select-button">
-          <button>
+          <button onClick={() => navigate("/investir-acoes")}>
             Acessar
             <img src={Seta} alt="Seta" />
           </button>

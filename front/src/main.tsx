@@ -7,7 +7,7 @@ import App from './App.tsx';
 import Home from './components/Home/Home.tsx';
 import Login from './pages/Login/Login.tsx';
 import InvestOptions from './pages/InvestOptions/InvestOptions.tsx';
-import DefaultPage from './pages/Default/DefaultPage.tsx';
+import { InvestList } from './pages/InvestList/InvestList.tsx';
 
 import './style.scss'
 
@@ -19,6 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route element={<App />}>
           <Route path='/' element={<Home />} />
           <Route path='/investir' element={<InvestOptions />} />
+          <Route path='/investir-acoes' element={<InvestList />} />
         </Route>
       </Routes>
     </BrowserRouter>
