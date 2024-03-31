@@ -7,16 +7,18 @@ import Home from './components/Home/Home.tsx';
 import Login from './pages/Login/Login.tsx';
 import Main from './pages/Main/Main.tsx'
 import Deposit from './components/Deposit/Deposit.tsx';
+import Register from './pages/Register/Register.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-      <Route path='/login' element={<Login />} />
-        <Route element={<Main />}>
-          <Route path='/' element={<Deposit />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>,
+    <React.StrictMode>
+        <BrowserRouter>
+            <Routes>
+                <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<Register/>} />
+                <Route element={<Main />}>
+                    <Route path='/' element={<Deposit />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    </React.StrictMode>,
 )
