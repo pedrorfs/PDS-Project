@@ -1,6 +1,7 @@
-.default-page {
+.main {
     display: flex;
     flex-direction: column;
+    height: 100vh;
 
     &__bottom {
         display: flex;
