@@ -112,3 +112,7 @@ História #11: Como usuário, eu gostaria de resgatar um investimento feito
     - Adaptar a tela que lista os investimentos já feitos para que seja adicionado uma opção de resgatar o valor [João Vítor]
     - Implementar lógica no backend que permita o resgate de um investimento [João Pedro]
     - Integrar essa funcionalidade do frontend com a lógica do backend [João Vítor]
+
+## Figma
+
+https://www.figma.com/file/iS09Vu7G3q5LsF4AsvEAku/Untitled?type=design&node-id=0-1&mode=design&t=tt5cWwebhpwton3z-0
