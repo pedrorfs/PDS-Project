@@ -1,7 +1,7 @@
 import './deposit.scss'
 import Button from './../../assets/buttonReturn.svg'
 
-const Deposit = () => {
+export const Deposit = () => {
   return (
     <div className='deposit'>
         <h2 className='deposit__title'>Depósito</h2>
@@ -18,5 +18,3 @@ const Deposit = () => {
     </div>
   )
 }
-
-export default Deposit

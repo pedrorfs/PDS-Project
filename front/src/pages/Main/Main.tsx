@@ -1,12 +1,11 @@
 import { Outlet } from 'react-router-dom'
 
-import Sidebar from '../../components/Sidebar/Sidebar'
-import Topbar from '../../components/Topbar/Topbar'
+import { Sidebar } from '../../components/Sidebar/Sidebar'
+import { Topbar } from '../../components/Topbar/Topbar'
 
 import './main.scss'
 
-
-function Main() {
+export function Main() {
 
     return (
         <div className="main">
@@ -19,4 +18,3 @@ function Main() {
     )
 }
 
-export default Main

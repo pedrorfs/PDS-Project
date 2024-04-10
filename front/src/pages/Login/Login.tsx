@@ -2,7 +2,7 @@ import "./login.scss";
 import Seta from  './../../assets/Seta.png';
 import Logo from './../../assets/Eminente.svg'
 
-export default function Login() {
+export function Login() {
 
 
     return (

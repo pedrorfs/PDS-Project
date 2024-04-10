@@ -20,7 +20,7 @@ export function StockOption({ id, title, name, price }: StockOptionProps) {
         <p>{name}</p>
       </div>
       <h3>R$ {price}</h3>
-      <h3 onClick={() => navigate(`/comprar-acoes/${name.toLocaleLowerCase()}`)} className="stock-container__buy">Comprar</h3>
+      <h3 onClick={() => navigate(`/investir/bolsa-de-valores/comprar/${name.toLocaleLowerCase()}`)} className="stock-container__buy">Comprar</h3>
     </div>
   )
 }
