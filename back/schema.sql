@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS user;
+
+CREATE TABLE user (
+    cpf TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL,
+    balance INTEGER DEFAULT 100000
+);
