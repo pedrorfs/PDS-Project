@@ -2,7 +2,7 @@ import Logo from './../../assets/Eminente.svg'
 import './register.scss'
 import Seta from './../../assets/Seta.png'
 
-function Register() {
+export function Register() {
   return (
     <div className="register">
         <img className='register__logo' src={Logo} alt="" srcset="" />
@@ -45,5 +45,3 @@ function Register() {
     </div>
   )
 }
-
-export default Register

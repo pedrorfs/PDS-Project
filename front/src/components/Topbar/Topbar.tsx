@@ -2,7 +2,7 @@ import "./topbar.scss";
 import Logo from './../../assets/Eminente.svg';
 import Avatar from './../../assets/Avatar.png'
 
-export default function Topbar() {
+export function Topbar() {
 
 
     return (
