@@ -5,6 +5,8 @@ Repositório destinado ao desenvolvimento do trabalho prático da disciplina de 
 - João Vitor Bicalho da Silva (Front-end)
 - João Pedro Reis Teclo de Miranda (Back-end)
 - Pedro Renato Ferreira da Silva (Front-end)
+- Daniel Barreto Torres (Backend)
+
 
 ## Escopo
 Objetivo do Sistema: Corretora de Investimento
