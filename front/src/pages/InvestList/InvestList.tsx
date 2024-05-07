@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 import { InputAdornment, TextField } from "@mui/material";
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
@@ -10,6 +11,14 @@ import SearchIcon from "../../assets/SearchIcon.svg"
 import { StockOption } from "../../components/StockOption/StockOption";
 
 import "./InvestList.scss"
+
+import { apiB3 } from "../../api/config";
+
+// const baseUrl = 'https://api.hgbrasil.com/finance'
+// const apiKey = 'cd4fbc2d'
+
+const baseUrl = 'https://brapi.dev/api'
+const apiToken = 'hwKxsC7rtYAkff6xh2mGPF'
 
 const stocks = [
   {
@@ -34,6 +43,8 @@ export function InvestList() {
 
   const [searchText, setSearchText] = useState('')
 
+  const [apiData, setApiData] = useState([])
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     event.preventDefault()
     setSearchText(event.target.value);
@@ -42,6 +53,20 @@ export function InvestList() {
   const searchStocks = () => {
     console.log(searchText)
   }
+
+  const getApiData = async () => {
+    try {
+      const response = await apiB3.get(`/quote/list?token${apiToken}`)
+      const data = response.data
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getApiData()
+  }, [])
 
   return (
     <div className="list-container">
