@@ -13,4 +13,5 @@ class UserRepositorySQLite(UserRepo):
                 cursor.execute('INSERT INTO user (cpf, name, email, password) VALUES(:cpf, :name, :email, :password)', user)
                 connection.commit()
             except sqlite3.Error as err:
+                # TODO: unique value already exists in db (must pass which one to the caller)
                 print(f'Error {err.sqlite_errorcode} - {err.sqlite_errorname}')

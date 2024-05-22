@@ -26,34 +26,12 @@ export function Register() {
             "password": "teste12345"
         });
 
-        const requestOptions = {
+        fetch("/api/user/new", {
             method: "POST",
-            mode: "no-cors",
-            headers: myHeaders,
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: raw,
-            redirect: "follow"
-        };
-
-        const headers = {
-            'Content-Type': 'application/json'
-        }
-
-        // fetch("http://127.0.0.1:5000/user/new", requestOptions)
-        //     .then((response) => response.text())
-        //     .then((result) => console.log(result))
-        //     .catch((error) => console.error(error));
-
-        fetch("http://127.0.0.1:5000/user/new", {
-            method: "POST",
-            // mode: "no-cors",
-            // headers: {
-            //     "Content-Type": "application/json",
-            //     "Accept": "application/json",
-            // },
-            headers: new Headers({ 'Content-Type': 'application/json' }),
-            // body: JSON.stringify(data), 
-            body: raw,
-            redirect: "follow"
         }).then((response) => response.text())
             .then((result) => console.log(result))
             .catch((error) => console.error(error));
@@ -89,7 +67,7 @@ export function Register() {
             <p className='register__description'>Abra sua conta</p>
             <div className='register__input'>
                 <label>
-                    Nome Comleto
+                    Nome Completo
                     <input type="text" />
                 </label>
             </div>
