@@ -1,10 +1,11 @@
 import sqlite3
 from contextlib import closing
-from domain import UserRepo
 
-class UserRepositorySQLite(UserRepo):
+from domain import RepositoryInterface, UserExists
+
+class SQLiteAdapter(RepositoryInterface):
     def insert_user(self, user):
-        # Serialize user data into JSON
+        # Serialize user data
         user = user.__dict__
 
         with closing(sqlite3.connect('database.db')) as connection:
@@ -12,6 +13,6 @@ class UserRepositorySQLite(UserRepo):
                 cursor = connection.cursor()
                 cursor.execute('INSERT INTO user (cpf, name, email, password) VALUES(:cpf, :name, :email, :password)', user)
                 connection.commit()
-            except sqlite3.Error as err:
-                # TODO: unique value already exists in db (must pass which one to the caller)
-                print(f'Error {err.sqlite_errorcode} - {err.sqlite_errorname}')
+            except sqlite3.IntegrityError as err:
+                conflict_field = str(err).split()[-1]
+                raise UserExists(conflict_field)
