@@ -13,12 +13,15 @@
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
+    // border: 1px solid red;
+    width: 30%;
   }
 
   h3 {
     line-height: 1.25rem;
     font-size: 1.25rem;
     font-weight: 500;
+    // width: 30%;
   }
 
   p {
@@ -28,8 +31,9 @@
     color: #636363;
   }
 
-  &__buy{
+  &__buy {
     cursor: pointer;
+    // width: 33%;
   }
 
 }

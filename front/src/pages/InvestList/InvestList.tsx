@@ -20,6 +20,18 @@ import { apiB3 } from "../../api/config";
 const baseUrl = 'https://brapi.dev/api'
 const apiToken = 'hwKxsC7rtYAkff6xh2mGPF'
 
+interface StockOptionProps {
+  change: number
+  close: number
+  logo: string
+  market_cap: number | null
+  name: string
+  sector: string
+  stock: string
+  type: string
+  volume: number
+}
+
 const stocks = [
   {
     id: "1",
@@ -44,21 +56,32 @@ export function InvestList() {
   const [searchText, setSearchText] = useState('')
 
   const [apiData, setApiData] = useState([])
+  const [stocksDisplay, setStocksDisplay] = useState<StockOptionProps[] | null>([])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     event.preventDefault()
     setSearchText(event.target.value);
   };
 
-  const searchStocks = () => {
+  const searchStocks = async () => {
     console.log(searchText)
   }
 
   const getApiData = async () => {
     try {
+      // let response
+      // if(searchText === ''){
+      //   response = await apiB3.get(`/quote/list?token${apiToken}`)
+      // } else {
+      //   response = await apiB3.get(`/quote/list?token${apiToken}?search=${searchText}`)
+      // }
       const response = await apiB3.get(`/quote/list?token${apiToken}`)
-      const data = response.data
-      console.log(data)
+      const data = response.data.stocks
+      setApiData(data)
+      console.log(apiData)
+      console.log('slice')
+      console.log(data.slice(0, 8))
+      setStocksDisplay(data.slice(0, 8))
     } catch (error) {
       console.log(error)
     }
@@ -108,25 +131,27 @@ export function InvestList() {
           onChange={handleChange}
           value={searchText}
         />
-        {/* <button onClick={searchStocks}>
+        <button onClick={searchStocks}>
           <IoSearch style={{
             color: "white",
-            height:"1.5rem",
+            height: "1.5rem",
             width: "1.5rem",
-          }}/>
+          }} />
           Buscar
-        </button> */}
+        </button>
       </div>
 
       <div className="list-container__stocks">
-        {stocks.map(stock => {
+        {stocksDisplay?.map(stock => {
           return (
             <StockOption
-              key={stock.id}
-              id={stock.id}
-              title={stock.title}
+              key={stock.stock}
+              change={stock.change}
+              close={stock.close}
               name={stock.name}
-              price={stock.price}
+              sector={stock.sector}
+              stock={stock.stock}
+              volume={stock.volume}
             />
           )
         })}
