@@ -49,25 +49,52 @@ const stocks = [
 
 export function InvestList() {
 
+  const [loading, setLoading] = useState(false)
+
   const [isSelectedETF, setIsSelectedETF] = useState(false)
   const [isSelectedFII, setIsSelectedFII] = useState(false)
   const [isSelectedStock, setIsSelectedStock] = useState(false)
 
   const [searchText, setSearchText] = useState('')
 
-  const [apiData, setApiData] = useState([])
-  const [stocksDisplay, setStocksDisplay] = useState<StockOptionProps[] | null>([])
+  const [apiData, setApiData] = useState<StockOptionProps[]>([])
+  const [searchApiData, setSearchApiData] = useState<StockOptionProps[]>([])
+  const [stocksDisplay, setStocksDisplay] = useState<StockOptionProps[]>([])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     event.preventDefault()
     setSearchText(event.target.value);
   };
 
-  const searchStocks = async () => {
+  const searchStocks = () => {
     console.log(searchText)
+
+    console.log(apiData)
+
+    setSearchApiData(apiData.filter(data => (data.stock.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)))
+    console.log('search')
+    console.log(searchApiData)
+
+    if(searchApiData.length > 0){
+      setStocksDisplay(searchApiData.slice(0, 8))
+    }    
+    
+  }
+
+  const filterFII = () => {
+    setIsSelectedFII(!isSelectedFII)
+  }
+
+  const filterStock = () => {
+    setIsSelectedStock(!isSelectedStock)
+  }
+
+  const filterBDR = () => {
+    setIsSelectedETF(!isSelectedETF)
   }
 
   const getApiData = async () => {
+    setLoading(true)
     try {
       // let response
       // if(searchText === ''){
@@ -75,13 +102,22 @@ export function InvestList() {
       // } else {
       //   response = await apiB3.get(`/quote/list?token${apiToken}?search=${searchText}`)
       // }
+
+      // const responseTeste = await apiB3.get(`/quote/list?token${apiToken}&search=pe`)
+      // console.log(responseTeste.data.stocks)
+
       const response = await apiB3.get(`/quote/list?token${apiToken}`)
+
+      console.log('response')
+      console.log(response.data)
+
       const data = response.data.stocks
       setApiData(data)
       console.log(apiData)
       console.log('slice')
       console.log(data.slice(0, 8))
       setStocksDisplay(data.slice(0, 8))
+      setLoading(false)
     } catch (error) {
       console.log(error)
     }
@@ -95,17 +131,17 @@ export function InvestList() {
     <div className="list-container">
       <div className="list-container__filters">
         <button
-          onClick={() => { setIsSelectedETF(!isSelectedETF) }}
+          onClick={filterBDR}
           className={`${isSelectedETF ? "black-filter" : ""}`}>
           Fundos de Índice (ETFs)
         </button>
         <button
-          onClick={() => { setIsSelectedFII(!isSelectedFII) }}
+          onClick={filterFII}
           className={`${isSelectedFII ? "black-filter" : ""}`}>
           Fundos Imobiliários (FIIs)
         </button>
         <button
-          onClick={() => { setIsSelectedStock(!isSelectedStock) }}
+          onClick={filterStock}
           className={`${isSelectedStock ? "black-filter" : ""}`}>
           Ações Brasileiras
         </button>
@@ -141,6 +177,11 @@ export function InvestList() {
         </button>
       </div>
 
+      {loading && (
+        <div className="list-container__loading">
+          <h2>Carregando...</h2>
+        </div>
+      )}
       <div className="list-container__stocks">
         {stocksDisplay?.map(stock => {
           return (
