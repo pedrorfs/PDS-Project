@@ -59,6 +59,11 @@ export function InvestList() {
 
   const [apiData, setApiData] = useState<StockOptionProps[]>([])
   const [searchApiData, setSearchApiData] = useState<StockOptionProps[]>([])
+
+  const [filterFIIData, setFilterFIIData] = useState<StockOptionProps[]>([])
+  const [filterStockData, setFilterStockData] = useState<StockOptionProps[]>([])
+  const [filterBDRData, setFilterBDRData] = useState<StockOptionProps[]>([])
+
   const [stocksDisplay, setStocksDisplay] = useState<StockOptionProps[]>([])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -75,22 +80,73 @@ export function InvestList() {
     console.log('search')
     console.log(searchApiData)
 
-    if(searchApiData.length > 0){
+    if (searchApiData.length > 0) {
       setStocksDisplay(searchApiData.slice(0, 8))
-    }    
-    
+    }
+
   }
 
   const filterFII = () => {
-    setIsSelectedFII(!isSelectedFII)
+    if (isSelectedFII === false) {
+      setIsSelectedFII(true)
+      setIsSelectedStock(false)
+      setIsSelectedETF(false)
+
+      setFilterFIIData(apiData.filter(data => (data.type === 'fund')))
+      console.log(filterFIIData)
+
+      if (filterFIIData.length > 0) {
+        setStocksDisplay(filterFIIData.slice(0, 8))
+      }
+    } else if (isSelectedFII === true) {
+      setIsSelectedFII(false)
+
+      setStocksDisplay(apiData.slice(0, 8))
+    }
+    // setIsSelectedFII(!isSelectedFII)
+    // console.log(apiData)
   }
 
   const filterStock = () => {
-    setIsSelectedStock(!isSelectedStock)
+    if (isSelectedStock === false) {
+      setIsSelectedStock(true)
+      setIsSelectedFII(false)
+      setIsSelectedETF(false)
+
+      setFilterStockData(apiData.filter(data => (data.type === 'stock')))
+      console.log(filterStockData)
+
+      if (filterStockData.length > 0) {
+        setStocksDisplay(filterStockData.slice(0, 8))
+      }
+    } else if (isSelectedStock === true) {
+      setIsSelectedStock(false)
+
+      setStocksDisplay(apiData.slice(0, 8))
+    }
+    // setIsSelectedStock(!isSelectedStock)
+    // console.log(apiData)
   }
 
   const filterBDR = () => {
-    setIsSelectedETF(!isSelectedETF)
+    if (isSelectedETF === false) {
+      setIsSelectedETF(true)
+      setIsSelectedFII(false)
+      setIsSelectedStock(false)
+
+      setFilterBDRData(apiData.filter(data => (data.type === 'bdr')))
+      console.log(filterBDRData)
+
+      if (filterBDRData.length > 0) {
+        setStocksDisplay(filterBDRData.slice(0, 8))
+      }
+    } else if (isSelectedETF === true) {
+      setIsSelectedETF(false)
+
+      setStocksDisplay(apiData.slice(0, 8))
+    }
+    // setIsSelectedETF(!isSelectedETF)
+    // console.log(apiData)
   }
 
   const getApiData = async () => {
@@ -108,14 +164,14 @@ export function InvestList() {
 
       const response = await apiB3.get(`/quote/list?token${apiToken}`)
 
-      console.log('response')
-      console.log(response.data)
+      // console.log('response')
+      // console.log(response.data)
 
       const data = response.data.stocks
       setApiData(data)
       console.log(apiData)
-      console.log('slice')
-      console.log(data.slice(0, 8))
+      // console.log('slice')
+      // console.log(data.slice(0, 8))
       setStocksDisplay(data.slice(0, 8))
       setLoading(false)
     } catch (error) {
