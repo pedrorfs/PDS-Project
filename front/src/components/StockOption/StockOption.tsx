@@ -22,7 +22,7 @@ export function StockOption({ change, close, name, sector, stock, volume }: Stoc
         <p>{stock}</p>
       </div>
       <h3>{close.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h3>
-      <h3 onClick={() => navigate(`/investir/bolsa-de-valores/comprar/${stock.toLocaleLowerCase()}`)} className="stock-container__buy">Comprar</h3>
+      <h3 onClick={() => navigate(`/investir/bolsa-de-valores/comprar/${stock}`)} className="stock-container__buy">Comprar</h3>
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom"
 
 import ArrowBack from "../../assets/ArrowBack.svg"
@@ -7,11 +8,58 @@ import { FaArrowRight } from "react-icons/fa";
 
 import "./BuyStock.scss"
 
+import { apiB3 } from "../../api/config";
+
+const apiToken = 'hwKxsC7rtYAkff6xh2mGPF'
+
+interface StockOptionProps {
+  change: number
+  close: number
+  logo: string
+  market_cap: number | null
+  name: string
+  sector: string
+  stock: string
+  type: string
+  volume: number
+}
+
 export function BuyStock() {
 
   const navigate = useNavigate()
 
-  const stockName = useParams();
+  const stockName = useParams()
+
+  const [apiData, setApiData] = useState<StockOptionProps[]>([])
+  const [searchApiData, setSearchApiData] = useState<StockOptionProps[]>([])
+
+  const [stockNameDisplay, setStockNameDisplay] = useState('')
+  const [stockCodDisplay, setStockCodDisplay] = useState('')
+  const [stockPriceDisplay, setStockPriceDisplay] = useState(0)
+
+  const getStockData = async () => {
+    console.log(stockName)
+    const searchStockName = stockName.name
+    console.log(searchStockName);
+
+    const response = await apiB3.get(`/quote/list?token${apiToken}&search=${searchStockName}`)
+    // console.log(response.data)
+    // const data = response.data.stocks[0]
+    setApiData(response.data.stocks[0])
+    console.log(apiData)
+
+    setStockCodDisplay(response.data.stocks[0].stock)
+
+    setStockNameDisplay(response.data.stocks[0].name)
+
+    setStockPriceDisplay(response.data.stocks[0].close)
+    // setSearchApiData(apiData.filter(data => (data.stock.toLocaleLowerCase().indexOf(searchStockName?.toLowerCase) > -1)))
+    // console.log(searchApiData)
+  }
+
+  useEffect(() => {
+    getStockData()
+  }, [])
 
   return (
     <div className="buy-stock-container">
@@ -21,6 +69,7 @@ export function BuyStock() {
         <div className="header">
           <h1>Quanto você quer investir?</h1>
           <p>Saldo disponível: <span> R$ 100,00</span></p>
+          <p>Valor unitário {stockCodDisplay}: <span> R$ 50,00</span></p>
         </div>
 
         <div className="mid">
@@ -35,11 +84,12 @@ export function BuyStock() {
           </div>
           <button>
             {/* <img src={Arrow} alt="Seta" /> */}
-            <FaArrowRight style={{
+            {/* <FaArrowRight style={{
               width: "1rem",
               height: "1rem",
               color: "white",
-            }} />
+            }} /> */}
+            Confirmar investimento
           </button>
         </div>
       </div>

@@ -168,7 +168,7 @@ export function InvestList() {
       // console.log(response.data)
 
       const data = response.data.stocks
-      setApiData(data)
+      setApiData(response.data.stocks)
       console.log(apiData)
       // console.log('slice')
       // console.log(data.slice(0, 8))
