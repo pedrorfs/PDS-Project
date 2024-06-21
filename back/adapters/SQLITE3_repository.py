@@ -1,6 +1,6 @@
 import sqlite3
 from contextlib import closing
-from domain import UserRepo
+from adapters.user_repository import UserRepo
 
 class UserRepositorySQLite(UserRepo):
     def insert_user(self, user):
