@@ -6,5 +6,5 @@ Inject==4.3.1
 itsdangerous==2.2.0
 jinja2==3.1.4
 MarkupSafe==2.1.5
-werkzeug==3.0.3
-zipp==3.19.2
+python-dotenv==1.0.1
+Werkzeug==3.0.1

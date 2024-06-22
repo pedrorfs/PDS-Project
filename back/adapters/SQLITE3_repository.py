@@ -1,5 +1,6 @@
 import sqlite3
 from contextlib import closing
+from adapters.user_repository import UserRepo
 
 from domain import RepositoryInterface, UserExists
 
