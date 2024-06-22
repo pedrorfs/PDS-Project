@@ -1,5 +1,7 @@
-from domain.user import User
-#from app import repository
+from domain.repository_interface import UserExists
 
 def save_new_user(user, repository):
-    repository.insert_user(user)
+    try:
+        repository.insert_user(user)
+    except:
+        raise

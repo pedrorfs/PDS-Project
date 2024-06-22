@@ -1,9 +1,9 @@
 from flask import Flask 
 
-import domain.user as user, adapters.SQLITE3_repository as SQLITE3_repository
+import domain.user as user, back.adapters.sqlite_adapter as sqlite_adapter
 
 app = Flask(__name__)
 
-repository = SQLITE3_repository.UserRepositorySQLite()
+repository = sqlite_adapter.SQLiteAdapter()
 
 from routes import routes

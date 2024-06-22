@@ -1,27 +1,9 @@
-from abc import ABC, abstractmethod
+from dataclasses import dataclass
 
-import inject
-
-class RepositoryInterface(ABC):
-    @abstractmethod
-    def insert_user(self, user) -> None:
-        pass
-
-class UserExists(Exception):
-    pass
-
+@dataclass
 class User():
-    @inject.autoparams('repo')
-    def __init__(self, repo: RepositoryInterface, cpf, name, email, password, balance=None):
-        self.__repo = repo
-        self.cpf = cpf
-        self.name = name
-        self.email = email
-        self.password = password
-        self.balance = balance
-
-    def save_to_repo(self):
-        try:
-            self.__repo.insert_user(self)
-        except:
-            raise
+    cpf: str
+    name: str
+    email: str
+    password: str
+    balance: int | None = None
