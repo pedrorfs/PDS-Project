@@ -12,7 +12,9 @@ export function Main() {
             <Topbar />
             <div className="main__bottom">
                 <Sidebar />
-                <Outlet />
+                <div className='main__content'>
+                    <Outlet />
+                </div>
             </div>
         </div>
     )
