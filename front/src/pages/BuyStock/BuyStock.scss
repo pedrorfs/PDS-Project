@@ -13,12 +13,26 @@
     flex-direction: column;
     padding: 2rem;
 
+    // img {
+    //   width: 2rem;
+    //   height: 2rem;
+    //   margin-bottom: 1rem;
+    //   cursor: pointer;
+    // }
+  }
+
+  .top-buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+
     img {
       width: 2rem;
       height: 2rem;
-      margin-bottom: 1rem;
-      cursor: pointer;
     }
+
   }
 
   .header {
@@ -96,7 +110,7 @@
       font-weight: bold;
     }
 
-    button:hover{
+    button:hover {
       filter: brightness(0.9);
     }
   }

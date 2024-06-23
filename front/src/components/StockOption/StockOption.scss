@@ -14,7 +14,7 @@
     flex-direction: column;
     gap: 0.25rem;
     // border: 1px solid red;
-    width: 30%;
+    width: 25%;
   }
 
   h3 {
@@ -31,9 +31,31 @@
     color: #636363;
   }
 
-  &__buy {
-    cursor: pointer;
-    // width: 33%;
-  }
+  // &__buyfav {
+  //   // cursor: pointer;
+  //   border: 1px solid black;
+  //   display: flex;
+  //   flex-direction: row;
+  //   // align-items: center;
+  //   // justify-content: space-between;
+  //   // width: 33%;
 
+  //   &__buy {
+  //     cursor: pointer;
+  //     // border: 1px solid purple;
+  //   }
+  // }
+
+}
+
+.buy-fav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.buy-fav h3{
+  cursor: pointer;
 }

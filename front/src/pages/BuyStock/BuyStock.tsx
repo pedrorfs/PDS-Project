@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import ArrowBack from "../../assets/ArrowBack.svg"
 import Arrow from "../../assets/Arrow.svg"
 
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaHeart, FaRegHeart } from "react-icons/fa";
 
 import "./BuyStock.scss"
 
@@ -37,6 +37,8 @@ export function BuyStock() {
   const [stockCodDisplay, setStockCodDisplay] = useState('')
   const [stockPriceDisplay, setStockPriceDisplay] = useState(0)
 
+  const [favorite, setFavorite] = useState(false)
+
   const getStockData = async () => {
     console.log(stockName)
     const searchStockName = stockName.name
@@ -64,7 +66,26 @@ export function BuyStock() {
   return (
     <div className="buy-stock-container">
       <div className="buy-stock-container__content">
-        <img onClick={() => navigate("/investir-acoes")} src={ArrowBack} alt="Voltar" />
+        <div className="top-buttons">
+          <img onClick={() => navigate("/investir/bolsa-de-valores")} src={ArrowBack} alt="Voltar" />
+          {favorite ?
+            (<FaHeart
+              // color="red"
+              size={24}
+              style={{
+                cursor: 'pointer'
+              }}
+              onClick={() => setFavorite(!favorite)}
+            />) :
+            (<FaRegHeart
+              // color="red"
+              size={24}
+              style={{
+                cursor: 'pointer'
+              }}
+              onClick={() => setFavorite(!favorite)}
+            />)}
+        </div>
 
         <div className="header">
           <h1>Quanto você quer investir?</h1>

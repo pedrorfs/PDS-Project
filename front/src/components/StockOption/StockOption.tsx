@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom"
+import { useState } from "react";
 
 import "./StockOption.scss"
+
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 interface StockOptionProps {
   change: number
@@ -15,6 +18,8 @@ export function StockOption({ change, close, name, sector, stock, volume }: Stoc
 
   const navigate = useNavigate()
 
+  const [favorite, setFavorite] = useState(false)
+
   return (
     <div className="stock-container">
       <div className="stock-container__name">
@@ -22,7 +27,27 @@ export function StockOption({ change, close, name, sector, stock, volume }: Stoc
         <p>{stock}</p>
       </div>
       <h3>{close.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h3>
-      <h3 onClick={() => navigate(`/investir/bolsa-de-valores/comprar/${stock}`)} className="stock-container__buy">Comprar</h3>
+      <div className="buy-fav">
+        <h3 onClick={() => navigate(`/investir/bolsa-de-valores/comprar/${stock}`)} className="buyfav__buy">Comprar</h3>
+        {favorite ?
+          (<FaHeart
+            // color="red"
+            size={20}
+            style={{
+              cursor: 'pointer'
+            }}
+            onClick={() => setFavorite(!favorite)}
+          />) :
+          (<FaRegHeart
+            // color="red"
+            size={20}
+            style={{
+              cursor: 'pointer'
+            }}
+            onClick={() => setFavorite(!favorite)}
+          />)}
+      </div>
+
     </div>
   )
 }

@@ -17,6 +17,9 @@ export function Sidebar() {
                <div className="sidebar__option">
                     <h3>Acessar Histórico</h3>
                </div>
+               <div className="sidebar__option" onClick={() => navigate("/favoritos")}>
+                    <h3>Favoritos</h3>
+               </div>
                <div className="sidebar__option">
                     <h3>Relatórios</h3>
                </div>
