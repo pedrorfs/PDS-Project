@@ -14,18 +14,18 @@ export function Sidebar() {
                <div className="sidebar__option" onClick={() => navigate("/investir")}>
                     <h3>Investir</h3>
                </div>
-               <div className="sidebar__option">
-                    <h3>Acessar Histórico</h3>
+               <div className="sidebar__option" onClick={() => navigate("/carteira")}>
+                    <h3>Carteira</h3>
                </div>
                <div className="sidebar__option" onClick={() => navigate("/favoritos")}>
                     <h3>Favoritos</h3>
                </div>
-               <div className="sidebar__option">
+               {/* <div className="sidebar__option">
                     <h3>Relatórios</h3>
                </div>
                <div className="sidebar__option">
                     <h3>Simulações</h3>
-               </div>
+               </div> */}
           </div>
      )
 }
