@@ -90,7 +90,7 @@ export function BuyStock() {
         <div className="header">
           <h1>Quanto você quer investir?</h1>
           <p>Saldo disponível: <span> R$ 100,00</span></p>
-          <p>Valor unitário {stockCodDisplay}: <span> R$ 50,00</span></p>
+          <p>Valor unitário {stockCodDisplay}: <span> {stockPriceDisplay.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span></p>
         </div>
 
         <div className="mid">

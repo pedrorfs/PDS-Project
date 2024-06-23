@@ -249,6 +249,7 @@ export function InvestList() {
               sector={stock.sector}
               stock={stock.stock}
               volume={stock.volume}
+              type={stock.type}
             />
           )
         })}

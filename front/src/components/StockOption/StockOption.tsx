@@ -12,9 +12,10 @@ interface StockOptionProps {
   sector: string
   stock: string
   volume: number
+  type: string
 }
 
-export function StockOption({ change, close, name, sector, stock, volume }: StockOptionProps) {
+export function StockOption({ change, close, name, sector, stock, volume, type }: StockOptionProps) {
 
   const navigate = useNavigate()
 

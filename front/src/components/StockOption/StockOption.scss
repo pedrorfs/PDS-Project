@@ -46,16 +46,16 @@
   //   }
   // }
 
-}
+  .buy-fav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
 
-.buy-fav {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
+    h3{
+      cursor: pointer;
+    }
+  }
 
-.buy-fav h3{
-  cursor: pointer;
 }
