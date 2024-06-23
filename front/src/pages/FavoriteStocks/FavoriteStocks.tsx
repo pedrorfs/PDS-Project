@@ -21,24 +21,27 @@ const stocks = [
   }
 ]
 
-export function FavoriteStocks(){
+export function FavoriteStocks() {
 
   return (
     <div className="favorite-list-container">
-      <h1 className="favorite-list-container__header">Meus Favoritos</h1>
+      <div className="favorite-list-container__content">
+        <h1 className="header">Meus Favoritos</h1>
 
-      <div className="favorite-list-container__stocks">
-      {stocks?.map(stock => {
-          return (
-            <FavoriteStockOption
-              key={stock.stock}
-              name={stock.name}
-              stock={stock.stock}
-              type={stock.type}
-            />
-          )
-        })}
+        <div className="stocks">
+          {stocks?.map(stock => {
+            return (
+              <FavoriteStockOption
+                key={stock.stock}
+                name={stock.name}
+                stock={stock.stock}
+                type={stock.type}
+              />
+            )
+          })}
+        </div>
       </div>
+
     </div>
   )
 }

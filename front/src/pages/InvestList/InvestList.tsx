@@ -185,26 +185,27 @@ export function InvestList() {
 
   return (
     <div className="list-container">
-      <div className="list-container__filters">
-        <button
-          onClick={filterBDR}
-          className={`${isSelectedETF ? "black-filter" : ""}`}>
-          Fundos de Índice (ETFs)
-        </button>
-        <button
-          onClick={filterFII}
-          className={`${isSelectedFII ? "black-filter" : ""}`}>
-          Fundos Imobiliários (FIIs)
-        </button>
-        <button
-          onClick={filterStock}
-          className={`${isSelectedStock ? "black-filter" : ""}`}>
-          Ações Brasileiras
-        </button>
-      </div>
+      <div className="list-container__content">
+        <div className="filters">
+          <button
+            onClick={filterBDR}
+            className={`${isSelectedETF ? "black-filter" : ""}`}>
+            Fundos de Índice (ETFs)
+          </button>
+          <button
+            onClick={filterFII}
+            className={`${isSelectedFII ? "black-filter" : ""}`}>
+            Fundos Imobiliários (FIIs)
+          </button>
+          <button
+            onClick={filterStock}
+            className={`${isSelectedStock ? "black-filter" : ""}`}>
+            Ações Brasileiras
+          </button>
+        </div>
 
-      <div className="list-container__search">
-        {/* <TextField
+        <div className="search">
+          {/* <TextField
           // label="With normal TextField"
           size="small"
           variant="outlined"
@@ -217,42 +218,44 @@ export function InvestList() {
             </InputAdornment>,
           }}
         /> */}
-        <input
-          type="text"
-          placeholder="Pesquise por um ativo"
-          onChange={handleChange}
-          value={searchText}
-        />
-        <button onClick={searchStocks}>
-          <IoSearch style={{
-            color: "white",
-            height: "1.5rem",
-            width: "1.5rem",
-          }} />
-          Buscar
-        </button>
-      </div>
-
-      {loading && (
-        <div className="list-container__loading">
-          <h2>Carregando...</h2>
+          <input
+            type="text"
+            placeholder="Pesquise por um ativo"
+            onChange={handleChange}
+            value={searchText}
+          />
+          <button onClick={searchStocks}>
+            <IoSearch style={{
+              color: "white",
+              height: "1.5rem",
+              width: "1.5rem",
+            }} />
+            Buscar
+          </button>
         </div>
-      )}
-      <div className="list-container__stocks">
-        {stocksDisplay?.map(stock => {
-          return (
-            <StockOption
-              key={stock.stock}
-              change={stock.change}
-              close={stock.close}
-              name={stock.name}
-              sector={stock.sector}
-              stock={stock.stock}
-              volume={stock.volume}
-              type={stock.type}
-            />
-          )
-        })}
+
+        {loading && (
+          <div className="loading">
+            <h2>Carregando...</h2>
+          </div>
+        )}
+        <div className="stocks">
+          {stocksDisplay?.map(stock => {
+            return (
+              <StockOption
+                key={stock.stock}
+                change={stock.change}
+                close={stock.close}
+                name={stock.name}
+                sector={stock.sector}
+                stock={stock.stock}
+                volume={stock.volume}
+                type={stock.type}
+              />
+            )
+          })}
+        </div>
+
       </div>
     </div>
   )
