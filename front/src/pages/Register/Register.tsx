@@ -1,104 +1,104 @@
-import axios from "axios"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 import Logo from './../../assets/Eminente.svg'
 import './register.scss'
 import Seta from './../../assets/Seta.png'
 
-import { apiBack } from "../../api/config"
+import { register } from "../../requests/User/Register"
 
 export function Register() {
 
-    const handleSubmit = () => {
+    const navigate = useNavigate()
+
+    const [name, setName] = useState('')
+    const [cpf, setCpf] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+
+    const submit = () => {
         const data = {
-            "cpf": "12345678900",
-            "name": "joao",
-            "email": "joao@gmail.com",
-            "password": "1234"
+            name: name,
+            cpf: cpf,
+            email: email,
+            password: password,
+            confirmPassword: confirmPassword,
         }
 
-        const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
+        console.log(data)
+    }
 
-        const raw = JSON.stringify({
-            "name": "joao",
-            "email": "joao@gmail.com",
-            "cpf": "12345678900",
-            "password": "teste12345"
-        });
+    const handleSubmit = async () => {
+        const data = {
+            "name": name,
+            "email": email,
+            "cpf": cpf,
+            "password": password
+        }
 
-        fetch("/api/user/new", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: raw,
-        }).then((response) => response.text())
-            .then((result) => console.log(result))
-            .catch((error) => console.error(error));
+        if (password !== confirmPassword) {
+            alert("As senhas devem ser iguais")
+        } else {
+            const response = await register(data)
 
-        // try {
-        //     // await axios.post("http://127.0.0.1:5000/user/new", data)
-        //     // await apiBack.post('/user/new', data)
-        //     fetch("http://127.0.0.1:5000/user/new", {
-        //         method: "POST", 
-        //         mode: "no-cors",
-        //         headers: {
-        //           "Content-Type": "application/json",
-        //         },
-        //         // body: JSON.stringify(data), 
-        //         body: raw,
-        //         redirect: "follow"
-        //       });
-        //     //   console.log(response.json()) ; // parses JSON response into native JavaScript objects
-        // } catch (error) {
-        //     console.log(error)
-        // }
-
-        // await fetch("http://127.0.0.1:5000/user/new", {
-        //     method: 'POST',
-        //     body: data
-        // })
-
+            navigate('/')
+        }     
     }
 
     return (
         <div className="register">
-            <img className='register__logo' src={Logo} alt="" srcset="" />
+            <img className='register__logo' src={Logo} alt="" />
             <p className='register__description'>Abra sua conta</p>
             <div className='register__input'>
                 <label>
                     Nome Completo
-                    <input type="text" />
+                    <input
+                        type="text"
+                        onChange={(e: any) => setName(e.target.value)}
+                    />
                 </label>
             </div>
             <div className='register__input'>
                 <label>
                     CPF
-                    <input type="text" />
+                    <input
+                        type="text"
+                        onChange={(e: any) => setCpf(e.target.value)}
+                    />
                 </label>
             </div>
             <div className='register__input'>
                 <label>
                     Email
-                    <input type="text" />
+                    <input
+                        type="text"
+                        onChange={(e: any) => setEmail(e.target.value)}
+                    />
                 </label>
             </div>
             <div className='register__input'>
                 <label>
                     Criar senha
-                    <input type="text" />
+                    <input
+                        type="password"
+                        onChange={(e: any) => setPassword(e.target.value)}
+                    />
                 </label>
             </div>
             <div className='register__input'>
                 <label>
                     Confirmar senha
-                    <input type="text" />
+                    <input
+                        type="password"
+                        onChange={(e: any) => setConfirmPassword(e.target.value)}
+                    />
                 </label>
             </div>
             <p className='register__permission'>Ao clicar em 'Continuar' com o seu cadastro, você autoriza a Eminente a coletar seus dados pessoais de acordo com as nossas Regras de Consentimento, com o objetivo de comunicar informações sobre o processo de abertura da sua conta.</p>
             <div className='register__button' onClick={() => handleSubmit()}>
                 Continuar
-                <img src={Seta} alt="" srcset="" />
+                <img src={Seta} alt="" />
             </div>
         </div>
     )
