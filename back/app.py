@@ -1,9 +1,12 @@
-from flask import Flask 
+from flask import Flask
 
-import domain.user as user, back.adapters.sqlite_adapter as sqlite_adapter
+from adapters.sqlite_adapter import SQLiteAdapter
 
 app = Flask(__name__)
 
-repository = sqlite_adapter.SQLiteAdapter()
+app.config['SECRET_KEY'] = '123'
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+
+repository = SQLiteAdapter()
 
 from routes import routes

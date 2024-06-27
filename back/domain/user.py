@@ -1,9 +1,11 @@
 from dataclasses import dataclass
+from typing import Optional
 
 @dataclass
 class User():
     cpf: str
-    name: str
-    email: str
     password: str
-    balance: int | None = None
+    id: int = -1
+    name: Optional[str] = None
+    email: Optional[str] = None
+    balance: Optional[int] = None
