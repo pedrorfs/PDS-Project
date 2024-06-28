@@ -13,11 +13,11 @@ def create_user_route():
         user = User(**request.json)
         save_new_user(user, repository)
     except UserExists:
-        return jsonify({'msg': 'User not found'}), 409
-    except Exception as err:
+        return jsonify({'msg': 'User already exists'}), 409
+    except Exception:
         return jsonify({'msg': 'Server error'}), 500
 
-    return jsonify({'msg': 'User created successfully'}), 201
+    return jsonify({'msg': 'User successfully created'}), 201
 
 @app.route('/api/login', methods=['POST', 'DELETE'])
 def login_route():
@@ -45,6 +45,21 @@ def user_route():
 
     user = get_user_by_id(user_id, repository)
     if not user:
-        return jsonify({'msg': 'User not found'}), 401
+        return jsonify({'msg': 'User not found'}), 404
+    return jsonify({'msg': 'User successfully fetched', 'data': user.__dict__}), 200
 
-    return jsonify({'data': user.__dict__})
+@app.route('/api/user/update', methods=['PUT'])
+def update_user_route():
+    user_id = session.get('current_user')
+    if not user_id:
+        return jsonify({'msg': 'Unauthorized request'}), 401
+
+    try:
+        user = User(**request.json)
+        edit_user_data(user_id, user, repository)
+    except UserNotFound:
+        return({'msg': 'User not found'}), 404
+    except Exception:
+        return({'msg': 'Update failed'}), 500
+
+    return jsonify({'msg': 'User successfully updated'}), 200
