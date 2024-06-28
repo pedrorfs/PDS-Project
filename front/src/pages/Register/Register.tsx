@@ -42,7 +42,7 @@ export function Register() {
         } else {
             const response = await register(data)
 
-            navigate('/')
+            navigate('/login')
         }     
     }
 
