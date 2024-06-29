@@ -63,3 +63,19 @@ def update_user_route():
         return({'msg': 'Update failed'}), 500
 
     return jsonify({'msg': 'User successfully updated'}), 200
+
+
+@app.route('/api/user/delete', methods=['DELETE'])
+def delete_user_route():
+    user_id = session.get('current_user')
+    if not user_id:
+        return jsonify({'msg': 'Unauthorized request'}), 401
+
+    try:
+        delete_user(user_id, repository)
+    except UserNotFound:
+        return({'msg': 'User not found'}), 404
+    except Exception:
+        return({'msg': 'Update failed'}), 500
+
+    return jsonify({'msg': 'User successfully removed'}), 200

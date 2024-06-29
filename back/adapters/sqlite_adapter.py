@@ -48,3 +48,12 @@ class SQLiteAdapter(RepositoryInterface):
                 connection.commit()
             except sqlite3.OperationalError:
                 raise UserNotFound
+
+    def remove_user(self, id):
+        with closing(sqlite3.connect('database.db')) as connection:
+            try:
+                cursor = connection.cursor()
+                cursor.execute('DELETE FROM user WHERE id = ?', (id,))
+                connection.commit()
+            except sqlite3.OperationalError:
+                raise UserNotFound

@@ -30,3 +30,9 @@ def get_user_by_cpf(cpf, repository):
 
 def get_user_by_id(id, repository):
     return repository.search_user('id', id)
+
+def delete_user(id, repository):
+    try:
+        repository.remove_user(id)
+    except Exception:
+        raise
