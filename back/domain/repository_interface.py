@@ -17,6 +17,10 @@ class RepositoryInterface(ABC):
     def remove_user():
         pass
 
+    @abstractmethod
+    def add_balance():
+        pass
+
 class UserExists(Exception):
     pass
 

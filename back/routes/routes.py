@@ -79,3 +79,19 @@ def delete_user_route():
         return({'msg': 'Update failed'}), 500
 
     return jsonify({'msg': 'User successfully removed'}), 200
+
+@app.route('/api/user/balance', methods=['PATCH'])
+def add_balance_route():
+    user_id = session.get('current_user')
+    if not user_id:
+        return jsonify({'msg': 'Unauthorized request'}), 401
+    
+    balance = request.json['balance']
+    try:
+        add_balance(user_id, balance,  repository)
+    except UserNotFound:
+        return({'msg': 'User not found'}), 404
+    except Exception:
+        return({'msg': 'Update failed'}), 500
+
+    return jsonify({'msg': 'Balance added to account'}), 200

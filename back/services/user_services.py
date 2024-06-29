@@ -8,14 +8,14 @@ def save_new_user(user, repository):
     except Exception:
         raise
 
-def edit_user_data(id, new_user, repository):
-    old_user = repository.search_user('id', id)
-    if not old_user:
+def edit_user_data(id, new_user_data, repository):
+    old_user_data = repository.search_user('id', id)
+    if not old_user_data:
         raise UserNotFound
     
-    new_user.id = old_user.id
+    new_user_data.id = old_user_data.id
     try:
-        repository.update_user(id, new_user)
+        repository.update_user(new_user_data)
     except Exception:
         raise
 
@@ -34,5 +34,16 @@ def get_user_by_id(id, repository):
 def delete_user(id, repository):
     try:
         repository.remove_user(id)
+    except Exception:
+        raise
+
+def add_balance(id, balance, repository):
+    user = repository.search_user('id', id)
+    if not user:
+        raise UserNotFound
+    
+    user.balance += balance
+    try:
+        repository.add_balance(user)
     except Exception:
         raise

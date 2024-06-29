@@ -38,7 +38,7 @@ class SQLiteAdapter(RepositoryInterface):
                 return None
             return User(**result)
         
-    def update_user(self, id, user):
+    def update_user(self, user):
         user = user.__dict__
 
         with closing(sqlite3.connect('database.db')) as connection:
@@ -54,6 +54,17 @@ class SQLiteAdapter(RepositoryInterface):
             try:
                 cursor = connection.cursor()
                 cursor.execute('DELETE FROM user WHERE id = ?', (id,))
+                connection.commit()
+            except sqlite3.OperationalError:
+                raise UserNotFound
+
+    def add_balance(self, user):
+        user = user.__dict__
+
+        with closing(sqlite3.connect('database.db')) as connection:
+            try:
+                cursor = connection.cursor()
+                cursor.execute('UPDATE user SET balance = :balance WHERE id = (:id)', user)
                 connection.commit()
             except sqlite3.OperationalError:
                 raise UserNotFound
