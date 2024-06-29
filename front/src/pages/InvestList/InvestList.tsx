@@ -14,9 +14,6 @@ import "./InvestList.scss"
 
 import { apiB3 } from "../../api/config";
 
-// const baseUrl = 'https://api.hgbrasil.com/finance'
-// const apiKey = 'cd4fbc2d'
-
 const baseUrl = 'https://brapi.dev/api'
 const apiToken = 'hwKxsC7rtYAkff6xh2mGPF'
 
@@ -103,8 +100,6 @@ export function InvestList() {
 
       setStocksDisplay(apiData.slice(0, 8))
     }
-    // setIsSelectedFII(!isSelectedFII)
-    // console.log(apiData)
   }
 
   const filterStock = () => {
@@ -124,8 +119,6 @@ export function InvestList() {
 
       setStocksDisplay(apiData.slice(0, 8))
     }
-    // setIsSelectedStock(!isSelectedStock)
-    // console.log(apiData)
   }
 
   const filterBDR = () => {
@@ -145,33 +138,18 @@ export function InvestList() {
 
       setStocksDisplay(apiData.slice(0, 8))
     }
-    // setIsSelectedETF(!isSelectedETF)
-    // console.log(apiData)
   }
 
   const getApiData = async () => {
     setLoading(true)
     try {
-      // let response
-      // if(searchText === ''){
-      //   response = await apiB3.get(`/quote/list?token${apiToken}`)
-      // } else {
-      //   response = await apiB3.get(`/quote/list?token${apiToken}?search=${searchText}`)
-      // }
-
-      // const responseTeste = await apiB3.get(`/quote/list?token${apiToken}&search=pe`)
-      // console.log(responseTeste.data.stocks)
 
       const response = await apiB3.get(`/quote/list?token${apiToken}`)
-
-      // console.log('response')
-      // console.log(response.data)
 
       const data = response.data.stocks
       setApiData(response.data.stocks)
       console.log(apiData)
-      // console.log('slice')
-      // console.log(data.slice(0, 8))
+
       setStocksDisplay(data.slice(0, 8))
       setLoading(false)
     } catch (error) {
@@ -205,19 +183,6 @@ export function InvestList() {
         </div>
 
         <div className="search">
-          {/* <TextField
-          // label="With normal TextField"
-          size="small"
-          variant="outlined"
-          onChange={handleChange}
-          placeholder="Buscar"
-          sx={{ m: 1, width: '100%', border: "none", background: "#E1E1E1", color: "#858585" }}
-          InputProps={{
-            startAdornment: <InputAdornment position="start">
-              <SearchRoundedIcon />
-            </InputAdornment>,
-          }}
-        /> */}
           <input
             type="text"
             placeholder="Pesquise por um ativo"
