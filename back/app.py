@@ -1,13 +1,12 @@
-from flask import Flask, request
+from flask import Flask
 
-import domain, repo
+from adapters.sqlite_adapter import SQLiteAdapter
 
 app = Flask(__name__)
 
-repository = repo.UserRepositorySQLite()
+app.config['SECRET_KEY'] = '123'
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 
-@app.route('/api/user/new', methods=['POST'])
-def create_user_route():
-    # TODO: Validate json request data
-    domain.User(**request.json).persist(repository)
-    return 'Success', 201
+repository = SQLiteAdapter()
+
+from routes import routes
