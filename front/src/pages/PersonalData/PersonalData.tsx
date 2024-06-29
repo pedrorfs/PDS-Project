@@ -9,11 +9,13 @@ export function PersonalData() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [cpf, setCpf] = useState('')
+  const [password, setPassword] = useState('')
 
   const data = {
     name: name,
     email: email,
-    cpf: cpf
+    cpf: cpf,
+    password: password
   }
 
   const handleSubmit = () => {
@@ -53,6 +55,16 @@ export function PersonalData() {
             type="text"
             onChange={(e: any) => setEmail(e.target.value)}
             value={email}
+          />
+        </label>
+      </div>
+
+      <div className='personal-data__input'>
+        <label>
+          Senha
+          <input
+            type="password"
+            onChange={(e: any) => setPassword(e.target.value)}
           />
         </label>
       </div>
