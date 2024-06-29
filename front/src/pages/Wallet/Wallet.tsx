@@ -1,7 +1,7 @@
 import Asset from './../../components/Asset/Asset.tsx';
 import './wallet.scss'
 
-export default function Wallet() {
+export function Wallet() {
     return (
         <div className='wallet'>
             <h2 className='wallet__title'>Carteira</h2>

@@ -43,7 +43,7 @@ export function Register() {
             const response = await register(data)
 
             navigate('/login')
-        }     
+        }
     }
 
     return (
@@ -56,6 +56,7 @@ export function Register() {
                     <input
                         type="text"
                         onChange={(e: any) => setName(e.target.value)}
+                        value={name}
                     />
                 </label>
             </div>
@@ -65,6 +66,7 @@ export function Register() {
                     <input
                         type="text"
                         onChange={(e: any) => setCpf(e.target.value)}
+                        value={cpf}
                     />
                 </label>
             </div>
@@ -74,6 +76,7 @@ export function Register() {
                     <input
                         type="text"
                         onChange={(e: any) => setEmail(e.target.value)}
+                        value={email}
                     />
                 </label>
             </div>
