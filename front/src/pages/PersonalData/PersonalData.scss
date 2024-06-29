@@ -1,0 +1,58 @@
+@import './../../style.scss';
+
+.personal-data {
+  // padding: 100px 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+
+  &__title {
+    height: fit-content;
+    // width: 200px;
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__input {
+    width: 25%;
+  }
+
+  input {
+    height: 55px;
+    width: 100%;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: solid 1px rgba(217, 217, 217, 40%);
+  }
+
+  &__button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: 35px;
+    width: 25%;
+    padding: 10px;
+    border-radius: 30px;
+    border: none;
+    background-color: $secondary-color;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: .3s;
+  }
+
+  &__button:hover {
+    filter: brightness(0.9);
+}
+}

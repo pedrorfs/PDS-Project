@@ -11,8 +11,9 @@ import { Register } from './pages/Register/Register.tsx';
 import { BuyStock } from './pages/BuyStock/BuyStock.tsx';
 import { InvestList } from './pages/InvestList/InvestList.tsx';
 import { InvestOptions } from './pages/InvestOptions/InvestOptions.tsx';
-import Wallet from './pages/Wallet/Wallet.tsx';
+import { Wallet } from './pages/Wallet/Wallet.tsx';
 import { FavoriteStocks } from './pages/FavoriteStocks/FavoriteStocks.tsx';
+import { PersonalData } from './pages/PersonalData/PersonalData.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                 <Route path='/cadastro' element={<Register />} />
                 <Route element={<Main />}>
                     <Route path='/' element={<Home />} />
+                    <Route path='/dados-pessoais' element={<PersonalData />} />
                     <Route path='/depositar' element={<Deposit />} />
                     <Route path='/carteira' element={<Wallet />} />
                     <Route path='/favoritos' element={<FavoriteStocks />} />
