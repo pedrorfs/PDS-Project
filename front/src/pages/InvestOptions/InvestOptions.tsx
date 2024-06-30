@@ -26,7 +26,7 @@ export function InvestOptions() {
       <div className="options-container__box">
         <img src={BankIcon} alt="Banco" />
         <h3>Bolsa de Valores</h3>
-        <p>Opções com maior potencial de ganho e, também, maior risco. Aqui você investe em Fundos Imobiliários (FIIs), ações brasileiras, estrangeiras (BDRs) e fundos de Índice (ETFs).</p>
+        <p>Aqui você investe em Fundos Imobiliários (FIIs), ações brasileiras, estrangeiras (BDRs) e fundos de Índice (ETFs).</p>
         <div className="options-container__select-button">
           <button onClick={() => navigate("/investir/bolsa-de-valores")}>
             Acessar
