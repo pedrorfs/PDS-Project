@@ -31,7 +31,7 @@ export function Login() {
 
         const response = await login(data)
 
-        navigate('/')
+        navigate('/home')
     }
 
     return (

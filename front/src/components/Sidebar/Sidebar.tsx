@@ -8,7 +8,7 @@ export function Sidebar() {
 
      return (
           <div className="sidebar">
-               <div className="sidebar__option" onClick={() => navigate("/")}>
+               <div className="sidebar__option" onClick={() => navigate("/home")}>
                     <h3>Home</h3>
                </div>
                <div className="sidebar__option" onClick={() => navigate("/investir")}>
