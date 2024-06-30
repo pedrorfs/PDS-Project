@@ -4,6 +4,8 @@ import Seta from './../../assets/Seta.png'
 
 import './PersonalData.scss'
 
+import { updateUser } from '../../requests/User/UpdateUser'
+
 export function PersonalData() {
 
   const [name, setName] = useState('')
@@ -18,9 +20,28 @@ export function PersonalData() {
     password: password
   }
 
-  const handleSubmit = () => {
+  const submit = () => {
+    const data = {
+      name: name,
+      cpf: cpf,
+      email: email,
+      password: password,
+    }
+
     console.log(data)
+  }
+
+  const handleSubmit = async () => {
+    const data = {
+      "name": name,
+      "email": email,
+      "cpf": cpf,
+      "password": password
+    }
+    const response = await updateUser(data)
+
     window.location.reload()
+
   }
 
   return (
