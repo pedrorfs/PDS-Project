@@ -5,6 +5,7 @@ import Seta from './../../assets/Seta.png'
 import './PersonalData.scss'
 
 import { updateUser } from '../../requests/User/UpdateUser'
+import { getUserData } from '../../requests/User/GetUserData'
 
 export function PersonalData() {
 
@@ -43,6 +44,22 @@ export function PersonalData() {
     window.location.reload()
 
   }
+
+  const getUser = async () => {
+
+    const response = await getUserData()
+
+    // console.log(response.data)
+
+    setCpf(response.data.cpf)
+    setEmail(response.data.email)
+    setName(response.data.name)
+
+  }
+
+  useEffect(() => {
+    getUser()
+  }, [])
 
   return (
     <div className='personal-data'>
