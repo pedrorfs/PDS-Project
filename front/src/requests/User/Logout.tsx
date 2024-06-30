@@ -7,7 +7,7 @@ const data = {
   };
 */
 
-export async function logout(body: any) {
+export async function logout() {
 
   await fetch("/api/login", {
     method: "DELETE",
