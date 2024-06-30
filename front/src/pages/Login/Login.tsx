@@ -44,6 +44,7 @@ export function Login() {
                 <div className="login__cpf">
                     <label >CPF</label>
                     <input
+                        placeholder="Digite seu email"
                         type="text"
                         onChange={(e: any) => setCpf(e.target.value)}
                         value={cpf} />
@@ -51,6 +52,7 @@ export function Login() {
                 <div className="login__password">
                     <label>Senha</label>
                     <input
+                        placeholder="Digite sua senha"
                         type="password"
                         onChange={(e: any) => setPassword(e.target.value)}
                     />

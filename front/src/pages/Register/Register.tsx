@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { IMaskInput } from "react-imask";
 
 import Logo from './../../assets/Eminente.svg'
 import './register.scss'
@@ -54,6 +55,7 @@ export function Register() {
                 <label>
                     Nome Completo
                     <input
+                        placeholder="Digite o nome conforme seu documento"
                         type="text"
                         onChange={(e: any) => setName(e.target.value)}
                         value={name}
@@ -63,8 +65,9 @@ export function Register() {
             <div className='register__input'>
                 <label>
                     CPF
-                    <input
-                        type="text"
+                    <IMaskInput
+                        mask="000.000.000-00"
+                        placeholder="000.000.000-00"
                         onChange={(e: any) => setCpf(e.target.value)}
                         value={cpf}
                     />
@@ -73,7 +76,14 @@ export function Register() {
             <div className='register__input'>
                 <label>
                     Email
+                    {/* <IMaskInput
+                        mask="000.000.000-00"
+                        placeholder="Digite seu email"
+                        onChange={(e: any) => setEmail(e.target.value)}
+                        value={email}
+                    /> */}
                     <input
+                        placeholder="Digite seu email"
                         type="text"
                         onChange={(e: any) => setEmail(e.target.value)}
                         value={email}
@@ -84,6 +94,7 @@ export function Register() {
                 <label>
                     Criar senha
                     <input
+                        placeholder="Digite sua senha"
                         type="password"
                         onChange={(e: any) => setPassword(e.target.value)}
                     />
@@ -93,6 +104,7 @@ export function Register() {
                 <label>
                     Confirmar senha
                     <input
+                        placeholder="Confirme sua senha"
                         type="password"
                         onChange={(e: any) => setConfirmPassword(e.target.value)}
                     />
