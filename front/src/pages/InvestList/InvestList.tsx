@@ -71,7 +71,7 @@ export function InvestList() {
     const searchStocks = () => {
 
         setSearchApiData(apiData.filter(data => {
-            return data.stock.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1 || data.name.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1
+            return data.stock.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) == 0 || data.name.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) == 0
         }))
 
         setStocksDisplay(searchApiData.slice(0, 8))
