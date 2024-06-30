@@ -43,7 +43,13 @@ export function Register() {
         } else {
             const response = await register(data)
 
-            navigate('/login')
+            if (response.msg === 'User already exists') {
+                alert('Usuário já existe')
+            } else if(response.msg === 'User successfully created'){
+                navigate('/login')
+            } else {
+                alert('Erro ao cadastrar usuário')
+            }
         }
     }
 

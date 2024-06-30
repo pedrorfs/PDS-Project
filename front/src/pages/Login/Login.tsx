@@ -31,7 +31,13 @@ export function Login() {
 
         const response = await login(data)
 
-        navigate('/home')
+        if (response.msg === 'Validated successfully'){
+            navigate('/home')
+        } else{
+            alert('Cpf e/ou senha incorretos')
+        }
+
+        
     }
 
     return (
