@@ -69,18 +69,10 @@ export function InvestList() {
     };
 
     const searchStocks = () => {
-        console.log(searchText)
-
-        console.log(apiData)
 
         setSearchApiData(apiData.filter(data => (data.stock.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) > -1)))
-        console.log('search')
-        console.log(searchApiData)
 
-        if (searchApiData.length > 0) {
-            setStocksDisplay(searchApiData.slice(0, 8))
-        }
-
+        setStocksDisplay(searchApiData.slice(0, 8))
     }
 
     const filterFII = () => {
@@ -128,7 +120,6 @@ export function InvestList() {
             setIsSelectedStock(false)
 
             setFilterBDRData(apiData.filter(data => (data.type === 'bdr')))
-            console.log(filterBDRData)
 
             if (filterBDRData.length > 0) {
                 setStocksDisplay(filterBDRData.slice(0, 8))
@@ -143,12 +134,10 @@ export function InvestList() {
     const getApiData = async () => {
         setLoading(true)
         try {
-
             const response = await apiB3.get(`/quote/list?token${apiToken}`)
 
             const data = response.data.stocks
             setApiData(response.data.stocks)
-            console.log(apiData)
 
             setStocksDisplay(data.slice(0, 8))
             setLoading(false)
@@ -158,8 +147,13 @@ export function InvestList() {
     }
 
     useEffect(() => {
-        getApiData()
-    }, [])
+        if (apiData.length === 0) {
+            getApiData()
+        }
+
+        searchStocks()
+        
+    }, [searchText])
 
     return (
         <div className="list-container">
