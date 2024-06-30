@@ -1,9 +1,38 @@
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+
 import "./login.scss";
-import Seta from  './../../assets/Seta.png';
+import Seta from './../../assets/Seta.png';
 import Logo from './../../assets/Eminente.svg'
+
+import { login } from "../../requests/User/Login";
 
 export function Login() {
 
+    const navigate = useNavigate()
+
+    const [cpf, setCpf] = useState('')
+    const [password, setPassword] = useState('')
+
+    const submit = () => {
+        const data = {
+            cpf: cpf,
+            password: password,
+        }
+
+        console.log(data)
+    }
+
+    const handleSubmit = async () => {
+        const data = {
+            "cpf": cpf,
+            "password": password
+        }
+
+        const response = await login(data)
+
+        navigate('/')
+    }
 
     return (
         <div className="login">
@@ -13,15 +42,21 @@ export function Login() {
             <div className="login__form">
                 <h3>Acesse sua conta</h3>
                 <div className="login__cpf">
-                    <label htmlFor="cpf">CPF</label>
-                    <input type="text" id="cpf" />
+                    <label >CPF</label>
+                    <input
+                        type="text"
+                        onChange={(e: any) => setCpf(e.target.value)}
+                        value={cpf} />
                 </div>
                 <div className="login__password">
-                    <label htmlFor="cpf">Senha</label>
-                    <input type="text" id="cpf" />
+                    <label>Senha</label>
+                    <input
+                        type="password"
+                        onChange={(e: any) => setPassword(e.target.value)}
+                    />
                 </div>
                 <div className="login__button">
-                    <button className="btn-primary">
+                    <button className="btn-primary" onClick={() => handleSubmit()}>
                         <img src={Seta} alt="" />
                     </button>
                 </div>
