@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-
+import { IMaskInput } from "react-imask";
 import "./login.scss";
 import Seta from './../../assets/Seta.png';
 import Logo from './../../assets/Eminente.svg'
@@ -43,11 +43,12 @@ export function Login() {
                 <h3>Acesse sua conta</h3>
                 <div className="login__cpf">
                     <label >CPF</label>
-                    <input
-                        placeholder="Digite seu email"
-                        type="text"
+                    <IMaskInput
+                        mask="000.000.000-00"
+                        placeholder="000.000.000-00"
                         onChange={(e: any) => setCpf(e.target.value)}
-                        value={cpf} />
+                        value={cpf}
+                    />
                 </div>
                 <div className="login__password">
                     <label>Senha</label>
