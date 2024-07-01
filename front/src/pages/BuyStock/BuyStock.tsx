@@ -8,6 +8,10 @@ import { FaArrowRight, FaHeart, FaRegHeart } from "react-icons/fa";
 
 import "./BuyStock.scss"
 
+import { getUserData } from "../../requests/User/GetUserData";
+import { getFavoriteStocks } from "../../requests/Invest/GetFavorites";
+import { buyStock } from "../../requests/Invest/BuyStock";
+
 import { apiB3 } from "../../api/config";
 
 const apiToken = 'hwKxsC7rtYAkff6xh2mGPF'
@@ -24,6 +28,11 @@ interface StockOptionProps {
   volume: number
 }
 
+interface FavoriteStock {
+  Code: string
+  Name: string
+}
+
 export function BuyStock() {
 
   const navigate = useNavigate()
@@ -36,6 +45,12 @@ export function BuyStock() {
   const [stockNameDisplay, setStockNameDisplay] = useState('')
   const [stockCodDisplay, setStockCodDisplay] = useState('')
   const [stockPriceDisplay, setStockPriceDisplay] = useState(0)
+
+  const [balance, setBalance] = useState(0)
+  const [investValue, setInvestValue] = useState(0)
+  const [stockQuotes, setStockQuotes] = useState(0)
+
+  const [myFavoriteStocks, setMyFavoriteStocks] = useState<FavoriteStock[]>([])
 
   const [favorite, setFavorite] = useState(false)
 
@@ -59,16 +74,65 @@ export function BuyStock() {
     // console.log(searchApiData)
   }
 
+  const getUser = async () => {
+
+    const response = await getUserData()
+
+    setBalance(response.data.balance)
+
+  }
+
+  const getFavorites = async () => {
+    const response = await getFavoriteStocks()
+
+    setMyFavoriteStocks(response)
+
+    // console.log('favorites', myFavoriteStocks)
+  }
+
+  // useEffect(() => {
+  //   getUser()
+  // }, [])
+
   useEffect(() => {
     getStockData()
+    getUser()
+    getFavorites()
   }, [])
+
+  const handleSubmit = async () => {
+
+    /* corpo da requisição
+const data = {
+    code: code,
+    name: name,
+    quantity: quantity,
+    price: price
+  };
+*/
+
+    const data = {
+      code: stockCodDisplay,
+      name: stockNameDisplay,
+      quantity: Math.floor(investValue / Math.round(stockPriceDisplay)),
+      price: Math.round(stockPriceDisplay)
+    }
+
+    console.log('investimentos')
+    console.log(data)
+
+    const response = await buyStock(data)
+
+  }
 
   return (
     <div className="buy-stock-container">
       <div className="buy-stock-container__content">
         <div className="top-buttons">
           <img onClick={() => navigate("/investir/bolsa-de-valores")} src={ArrowBack} alt="Voltar" />
-          {favorite ?
+          {myFavoriteStocks.find(
+            (favorite) => favorite.Code === stockCodDisplay
+          ) ?
             (<FaHeart
               // color="red"
               size={24}
@@ -89,21 +153,26 @@ export function BuyStock() {
 
         <div className="header">
           <h1>Quanto você quer investir?</h1>
-          <p>Saldo disponível: <span> R$ 100,00</span></p>
+          <p>Saldo disponível: <span> {balance.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span></p>
           <p>Valor unitário {stockCodDisplay}: <span> {stockPriceDisplay.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span></p>
         </div>
 
         <div className="mid">
           <p>Valor a investir</p>
-          <span>R$ 0,00</span>
+          {/* <span>R$ 0,00</span> */}
+          <input
+            placeholder="Digite o valor que deseja investir"
+            type="text"
+            onChange={(e: any) => setInvestValue(e.target.value)}
+          />
         </div>
 
         <div className="confirm">
           <div>
             <h3>Quantidade estimada</h3>
-            <p>0 cotas</p>
+            <p>{Math.floor(investValue / Math.round(stockPriceDisplay))} cotas</p>
           </div>
-          <button>
+          <button onClick={() => handleSubmit()}>
             {/* <img src={Arrow} alt="Seta" /> */}
             {/* <FaArrowRight style={{
               width: "1rem",
