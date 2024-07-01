@@ -1,9 +1,14 @@
-from flask import jsonify, request, session
-
-from app import app, repository
+from flask import request, jsonify, session
+import sqlite3
+from app import app
 from services.user_services import *
 from domain.user import User
+from domain.stock import Stock
 from domain.repository_interface import UserExists
+
+from adapters.sqlite_adapter import SQLiteAdapter
+
+repository = SQLiteAdapter()
 
 @app.route('/api/user/new', methods=['POST'])
 def create_user_route():
@@ -93,5 +98,72 @@ def add_balance_route():
         return({'msg': 'User not found'}), 404
     except Exception:
         return({'msg': 'Update failed'}), 500
-
+    
     return jsonify({'msg': 'Balance added to account'}), 200
+
+@app.route('/')
+def index_route():
+    return "Hello World!"
+
+
+@app.route('/api/user/favorite', methods=['POST', 'PATCH'])
+def add_favorite_stock_route():
+    user_id = session.get('current_user')
+    if not user_id:
+        return jsonify({'msg': 'Unauthorized request'}), 401
+    try:
+        data = request.json
+        if not all(k in data for k in ('code', 'name')):
+            return 'Dados inválidos!', 400
+        
+        stock = Stock(data['code'], data['name'])
+        repository.add_favorite_stock(user_id, stock)
+        return jsonify({"msg": "Success"}), 201
+    
+    except sqlite3.Error as err:
+        return jsonify({'msg': f'Error {err.sqlite_errorcode} - {err.sqlite_errorname}'}), 500
+
+@app.route('/api/user/favorites', methods=['GET'])
+def list_favorites_stocks_route():
+    user_id = session.get('current_user')
+    if not user_id:
+        return jsonify({'msg': 'Unauthorized request'}), 401
+    try:
+        favorites = repository.list_favorites_stocks(user_id)
+        response = [{'Code': code, 'Name': name} for code, name in favorites]
+        return response, 200
+        
+    except sqlite3.Error as err:
+        return jsonify({'msg': f'Error {err.sqlite_errorcode} - {err.sqlite_errorname}'}), 500
+    
+@app.route('/api/user/buy', methods=['POST'])
+def add_user_stock_route():
+    user_id = session.get('current_user')
+    if not user_id:
+        return jsonify({'msg': 'Unauthorized request'}), 401
+    try:
+        data = request.json
+        if not all(k in data for k in ('code', 'name', 'quantity', 'price')):
+            return jsonify({"msg": "Dados inválidos!"}), 400
+        
+        quantity = data['quantity']
+        price = data['price']
+        stock = Stock(data['code'], data['name'])
+        repository.add_user_stock(user_id, stock, quantity, price)
+        return jsonify({"msg": "Success"}), 201
+    
+    except sqlite3.Error as err:
+        return f'Erro {err.sqlite_errorcode} - {err.sqlite_errorname}', 500
+
+@app.route('/api/user/buy/list', methods=['GET'])
+def list_user_stocks_route():
+    user_id = session.get('current_user')
+    if not user_id:
+        return jsonify({'msg': 'Unauthorized request'}), 401
+    try:
+        stocks = repository.list_user_stocks(user_id)
+        response = [{'Code': code, 'Name': name, 'Quantity': quantity, 'Price': price} for code, name, quantity, price in stocks]
+        return response, 200
+        
+    except sqlite3.Error as err:
+        return jsonify({'msg': f'Error {err.sqlite_errorcode} - {err.sqlite_errorname}'}), 500
