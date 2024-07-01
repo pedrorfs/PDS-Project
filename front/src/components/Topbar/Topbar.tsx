@@ -54,11 +54,10 @@ export function Topbar() {
                 <div className="topbar__profile__name">
                     <h3>{userName}</h3>
                 </div>
-                <div className="topbar__dropdown">
+                <button className="topbar__dropdown" ref={menu} onClick={() => setMenuState(!menuState)}>
                     <img
                         className="topbar__avatar"
                         src={Avatar} alt=""
-                        ref={menu} onClick={() => setMenuState(!menuState)}
                     />
                     {
                         menuState &&
@@ -68,7 +67,7 @@ export function Topbar() {
                             <div className="topbar__dropdown__option" onClick={() => handleLogout()}>Sair</div>
                         </div>
                     }
-                </div>
+                </button>
 
             </div>
         </div>
