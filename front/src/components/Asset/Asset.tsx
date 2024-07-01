@@ -1,6 +1,9 @@
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+
 import "./asset.scss";
 import ArrowDown from "./../../assets/arrow-down.svg"
-import { useEffect, useRef, useState } from "react";
 
 import { apiB3 } from "../../api/config";
 
@@ -29,6 +32,8 @@ interface BuyStock {
 function Asset({ Code, Name, Price, Quantity }: BuyStock) {
     const menu = useRef(null);
     const [menuState, setMenuState] = useState(false);
+
+    const navigate = useNavigate()
 
     const [apiData, setApiData] = useState<StockOptionProps[]>([])
 
@@ -75,7 +80,7 @@ function Asset({ Code, Name, Price, Quantity }: BuyStock) {
                     {
                         menuState &&
                         <div className="asset__menu__options">
-                            <div className="asset__menu__option">Comprar</div>
+                            <div className="asset__menu__option" onClick={() => navigate(`/investir/bolsa-de-valores/comprar/${Code}`)}>Comprar</div>
                             <div className="asset__menu__option">Vender</div>
                         </div>
                     }
