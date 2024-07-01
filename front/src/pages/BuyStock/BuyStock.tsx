@@ -11,6 +11,8 @@ import "./BuyStock.scss"
 import { getUserData } from "../../requests/User/GetUserData";
 import { getFavoriteStocks } from "../../requests/Invest/GetFavorites";
 import { buyStock } from "../../requests/Invest/BuyStock";
+import { addFavorite } from "../../requests/Invest/AddFavorites";
+import { removeFavorite } from "../../requests/Invest/RemoveFavorites";
 
 import { apiB3 } from "../../api/config";
 
@@ -114,8 +116,8 @@ const data = {
     const data = {
       code: stockCodDisplay,
       name: stockNameDisplay,
-      quantity: Math.floor(investValue / Math.round(stockPriceDisplay)),
-      price: Math.round(stockPriceDisplay)
+      quantity: Math.floor(investValue / stockPriceDisplay),
+      price: stockPriceDisplay
     }
 
     console.log('investimentos')
@@ -123,6 +125,29 @@ const data = {
 
     const response = await buyStock(data)
 
+  }
+
+  const handleAddFavorite = async () => {
+
+    const data = {
+      code: stockCodDisplay,
+      name: stockNameDisplay,
+    }
+
+    const response = await addFavorite(data)
+
+    window.location.reload()
+  }
+
+  const handleRemoveFavorite = async () => {
+
+    const data = {
+      code: stockCodDisplay,
+    }
+
+    const response = await removeFavorite(data)
+
+    window.location.reload()
   }
 
   return (
@@ -139,7 +164,7 @@ const data = {
               style={{
                 cursor: 'pointer'
               }}
-              onClick={() => setFavorite(!favorite)}
+              onClick={() => handleRemoveFavorite()}
             />) :
             (<FaRegHeart
               // color="red"
@@ -147,7 +172,7 @@ const data = {
               style={{
                 cursor: 'pointer'
               }}
-              onClick={() => setFavorite(!favorite)}
+              onClick={() => handleAddFavorite()}
             />)}
         </div>
 
@@ -170,7 +195,7 @@ const data = {
         <div className="confirm">
           <div>
             <h3>Quantidade estimada</h3>
-            <p>{Math.floor(investValue / Math.round(stockPriceDisplay))} cotas</p>
+            <p>{Math.floor(investValue / stockPriceDisplay)} cotas</p>
           </div>
           <button onClick={() => handleSubmit()}>
             {/* <img src={Arrow} alt="Seta" /> */}

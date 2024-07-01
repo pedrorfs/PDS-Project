@@ -64,7 +64,6 @@ export function StockOption({ change, close, name, sector, stock, volume, type, 
             style={{
               cursor: 'pointer'
             }}
-            // onClick={() => setFavorite(!favorite)}
             onClick={() => handleRemoveFavorite()}
           />) :
           (<FaRegHeart
@@ -73,7 +72,6 @@ export function StockOption({ change, close, name, sector, stock, volume, type, 
             style={{
               cursor: 'pointer'
             }}
-            // onClick={() => setFavorite(!favorite)}
             onClick={() => handleAddFavorite()}
           />)}
       </div>
