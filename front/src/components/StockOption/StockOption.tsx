@@ -1,9 +1,12 @@
 import { useNavigate } from "react-router-dom"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./StockOption.scss"
 
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+
+import { addFavorite } from "../../requests/Invest/AddFavorites";
+import { getFavoriteStocks } from "../../requests/Invest/GetFavorites";
 
 interface StockOptionProps {
   change: number
@@ -15,11 +18,39 @@ interface StockOptionProps {
   type: string
 }
 
+interface FavoriteSotck {
+  Code: string
+  Name: string
+}
+
 export function StockOption({ change, close, name, sector, stock, volume, type }: StockOptionProps) {
 
   const navigate = useNavigate()
 
   const [favorite, setFavorite] = useState(false)
+  const [myFavoriteStocks, setMyFavoriteStocks] = useState<FavoriteSotck[]>([])
+
+  const handleFavorite = async () => {
+
+    const data = {
+      code: stock,
+      name: name,
+    }
+
+    const response = await addFavorite(data)
+  }
+
+  const getFavorites = async () => {
+    const response = await getFavoriteStocks()
+
+    setMyFavoriteStocks(response)
+
+    // console.log('favorites', myFavoriteStocks)
+  }
+
+  useEffect(() => {
+    getFavorites()
+  }, [])
 
   return (
     <div className="stock-container">
@@ -30,14 +61,17 @@ export function StockOption({ change, close, name, sector, stock, volume, type }
       <h3 className="stock-container__price">{close.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h3>
       <div className="buy-fav">
         <h3 onClick={() => navigate(`/investir/bolsa-de-valores/comprar/${stock}`)} className="buyfav__buy">Comprar</h3>
-        {favorite ?
+        {myFavoriteStocks.find(
+          (favorite) => favorite.Code === stock
+        ) ?
           (<FaHeart
             // color="red"
             size={20}
             style={{
               cursor: 'pointer'
             }}
-            onClick={() => setFavorite(!favorite)}
+            // onClick={() => setFavorite(!favorite)}
+            onClick={() => handleFavorite()}
           />) :
           (<FaRegHeart
             // color="red"
@@ -45,7 +79,8 @@ export function StockOption({ change, close, name, sector, stock, volume, type }
             style={{
               cursor: 'pointer'
             }}
-            onClick={() => setFavorite(!favorite)}
+            // onClick={() => setFavorite(!favorite)}
+            onClick={() => handleFavorite()}
           />)}
       </div>
 

@@ -29,21 +29,6 @@ interface StockOptionProps {
     volume: number
 }
 
-const stocks = [
-    {
-        id: "1",
-        title: "Vale",
-        name: "VALE3",
-        price: "59,76",
-    },
-    {
-        id: "2",
-        title: "Vale",
-        name: "VALE3",
-        price: "59,76",
-    }
-]
-
 export function InvestList() {
 
     const [loading, setLoading] = useState(false)
