@@ -18,7 +18,7 @@ interface StockOptionProps {
   type: string
 }
 
-interface FavoriteSotck {
+interface FavoriteStock {
   Code: string
   Name: string
 }
@@ -28,7 +28,7 @@ export function StockOption({ change, close, name, sector, stock, volume, type }
   const navigate = useNavigate()
 
   const [favorite, setFavorite] = useState(false)
-  const [myFavoriteStocks, setMyFavoriteStocks] = useState<FavoriteSotck[]>([])
+  const [myFavoriteStocks, setMyFavoriteStocks] = useState<FavoriteStock[]>([])
 
   const handleFavorite = async () => {
 

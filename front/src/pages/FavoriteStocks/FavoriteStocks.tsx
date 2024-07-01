@@ -4,24 +4,28 @@ import "./FavoriteStocks.scss"
 
 import { FavoriteStockOption } from "../../components/FavotiteStockOption/FavoriteStockOption";
 
-const stocks = [
-  {
-    id: "1",
-    name: "Vale",
-    stock: "VALE3",
-    price: "59,76",
-    type: "stock"
-  },
-  {
-    id: "2",
-    name: "Vale",
-    stock: "VALE3",
-    price: "59,76",
-    type: "stock"
-  }
-]
+import { getFavoriteStocks } from "../../requests/Invest/GetFavorites";
+
+interface FavoriteStock {
+  Code: string
+  Name: string
+}
 
 export function FavoriteStocks() {
+
+  const [myFavoriteStocks, setMyFavoriteStocks] = useState<FavoriteStock[]>([])
+
+  const getFavorites = async () => {
+    const response = await getFavoriteStocks()
+
+    setMyFavoriteStocks(response)
+
+    // console.log('favorites', myFavoriteStocks)
+  }
+
+  useEffect(() => {
+    getFavorites()
+  }, [])
 
   return (
     <div className="favorite-list-container">
@@ -29,13 +33,13 @@ export function FavoriteStocks() {
         <h1 className="header">Meus Favoritos</h1>
 
         <div className="stocks">
-          {stocks?.map(stock => {
+          {myFavoriteStocks?.map(stock => {
             return (
               <FavoriteStockOption
-                key={stock.stock}
-                name={stock.name}
-                stock={stock.stock}
-                type={stock.type}
+                key={stock.Code}
+                name={stock.Name}
+                stock={stock.Code}
+                // type={stock.type}
               />
             )
           })}
