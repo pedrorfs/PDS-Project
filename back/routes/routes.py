@@ -51,6 +51,7 @@ def user_route():
     user = get_user_by_id(user_id, repository)
     if not user:
         return jsonify({'msg': 'User not found'}), 404
+    user.balance = user.balance/100
     return jsonify({'msg': 'User successfully fetched', 'data': user.__dict__}), 200
 
 @app.route('/api/user/update', methods=['PUT'])
@@ -104,7 +105,6 @@ def add_balance_route():
 @app.route('/')
 def index_route():
     return "Hello World!"
-
 
 @app.route('/api/user/favorite', methods=['POST', 'PATCH'])
 def add_favorite_stock_route():
@@ -163,7 +163,7 @@ def add_user_stock_route():
             return jsonify({"msg": "Dados inválidos!"}), 400
         
         quantity = data['quantity']
-        price = data['price']
+        price = int(data['price'] * 100)
         stock = Stock(data['code'], data['name'])
         
         # Verificar saldo suficiente
@@ -199,7 +199,7 @@ def sell_user_stock_route():
         if user_stock is None or user_stock[2] < quantity:
             return jsonify({"msg": "Quantidade de ações insuficiente!"}), 400
         
-        total_value = quantity * user_stock[3]
+        total_value = quantity * int(user_stock[3] * 100)
         repository.sell_user_stock(user_id, stock_code, quantity)
         user = repository.search_user('id', user_id)
         user.balance += total_value
@@ -217,7 +217,7 @@ def list_user_stocks_route():
         return jsonify({'msg': 'Unauthorized request'}), 401
     try:
         stocks = repository.list_user_stocks(user_id)
-        response = [{'Code': code, 'Name': name, 'Quantity': quantity, 'Price': price} for code, name, quantity, price in stocks]
+        response = [{'Code': code, 'Name': name, 'Quantity': quantity, 'Price': price/100} for code, name, quantity, price in stocks]
         return response, 200
         
     except sqlite3.Error as err:
