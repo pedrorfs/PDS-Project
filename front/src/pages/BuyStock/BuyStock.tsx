@@ -104,15 +104,6 @@ export function BuyStock() {
 
   const handleSubmit = async () => {
 
-    /* corpo da requisição
-const data = {
-    code: code,
-    name: name,
-    quantity: quantity,
-    price: price
-  };
-*/
-
     const data = {
       code: stockCodDisplay,
       name: stockNameDisplay,
@@ -124,6 +115,8 @@ const data = {
     console.log(data)
 
     const response = await buyStock(data)
+
+    navigate('/carteira')
 
   }
 

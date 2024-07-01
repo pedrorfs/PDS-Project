@@ -16,6 +16,7 @@
         justify-content: space-between;
         align-items: center;
         gap: 5rem;
+        cursor: pointer;
     }
 
     &__return-button {
@@ -26,8 +27,38 @@
         margin-bottom: 20px;
     }
 
+    input{
+        width: 100%;
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        border-bottom: none;
+        font-size: 1.25rem;
+        line-height: 1.25rem;
+        font-weight: 500;
+        margin-bottom: 2rem;
+        // color: black;
+    }
+
     h5 {
         font-size: 16px;
         font-weight: 600
+    }
+
+    &__subtitle{
+        margin-bottom: 1rem;
+    }
+
+    p {
+        font-size: 1.25rem;
+        line-height: 1.25rem;
+        font-weight: 500;
+        color: #7F7F7F;
+        margin-bottom: 1rem;
+
+        span {
+            font-weight: 600;
+            color: black;
+        }
     }
 }
