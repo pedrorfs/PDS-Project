@@ -92,7 +92,7 @@ def add_balance_route():
     if not user_id:
         return jsonify({'msg': 'Unauthorized request'}), 401
     
-    balance = request.json['balance']
+    balance = int(request.json['balance'] * 100)
     try:
         add_balance(user_id, balance,  repository)
     except UserNotFound:
