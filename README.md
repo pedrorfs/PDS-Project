@@ -178,13 +178,6 @@ História #9: Como usuário, eu gostaria de monitorar (acompanhar) meus investim
     - Implementar lógica de armazenar no banco de dados os investimentos já feitos [Daniel]
     - Integrar a tela de “meus investimentos” com a lógica do backend [João Vítor]
 
-História #10: Como usuário, eu gostaria de resgatar um investimento feito
-  - Tarefas e responsáveis:
-    - Adaptar a tela que lista os investimentos já feitos para que seja adicionado uma opção de resgatar o valor 
-    - Implementar uma tela onde seja possível realizar a venda do ativo 
-    - Implementar lógica no backend que permita o resgate de um investimento [Daniel]
-    - Integrar essa funcionalidade do frontend com a lógica do backend 
-
 ## Diagrama da Arquitetura Hexagonal
 
 ![](hex.png)
