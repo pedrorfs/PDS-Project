@@ -45,7 +45,7 @@ class RepositoryInterface(ABC):
         pass
 
     @abstractmethod
-    def sell_user_stock(user_id, stock_code):
+    def sell_user_stock(user_id, stock_code, quantity):
         pass
 
 class UserExists(Exception):

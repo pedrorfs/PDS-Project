@@ -169,7 +169,7 @@ def add_user_stock_route():
         # Verificar saldo suficiente
         user = repository.search_user('id', user_id)
         total_price = quantity * price
-        if user.balance < total_price:
+        if user.balance <= total_price:
             return jsonify({"msg": "Saldo insuficiente!"}), 400
         
         user.balance -= total_price
@@ -192,10 +192,12 @@ def sell_user_stock_route():
         
         quantity = data['quantity']
         stock_code = data['code']
+        new_price = int(data['price'] * 100)
         
         # Verificar quantidade suficiente de ações
         user_stocks = repository.list_user_stocks(user_id)
         user_stock = next((stock for stock in user_stocks if stock[0] == stock_code), None)
+        
         if user_stock is None or user_stock[2] < quantity:
             return jsonify({"msg": "Quantidade de ações insuficiente!"}), 400
         
@@ -205,7 +207,12 @@ def sell_user_stock_route():
         user.balance += total_value
         repository.add_balance(user)
 
-        return jsonify({"msg": "Success"}), 200
+        total_cost = quantity * user_stock[3]
+        total_sale = quantity * new_price
+
+        revenue = total_sale - total_cost
+
+        return jsonify({"msg": "Success", 'Revenue': revenue}), 200
     
     except sqlite3.Error as err:
         return f'Erro {err.sqlite_errorcode} - {err.sqlite_errorname}', 500
