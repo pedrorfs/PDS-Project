@@ -100,6 +100,7 @@ História #8: Como usuário, eu gostaria de favoritar algumas opções de invest
 História #9: Como usuário, eu gostaria de poder realizar algum investimento
   - Tarefas e responsáveis:
     - Adaptar a tela de listagem de investimentos para que seja possível selecionar um e ser redirecionado para uma tela onde seja possível fazer a compra [João Vítor]
+    - Implementar uma tela onde seja possível selecionar o valor que desejar investir [Pedro]
     - Implementar a compra de ativos no banco de dados [João Pedro]
     - Integrar o frontend com a lógica de compra de ativos do backend [João Vítor]
 
@@ -112,6 +113,7 @@ História #10: Como usuário, eu gostaria de monitorar (acompanhar) meus investi
 História #11: Como usuário, eu gostaria de resgatar um investimento feito
   - Tarefas e responsáveis:
     - Adaptar a tela que lista os investimentos já feitos para que seja adicionado uma opção de resgatar o valor [João Vítor]
+    - Implementar uma tela onde seja possível realizar a venda do ativo
     - Implementar lógica no backend que permita o resgate de um investimento [João Pedro]
     - Integrar essa funcionalidade do frontend com a lógica do backend [João Vítor]
 
@@ -142,7 +144,7 @@ História #4: Como usuário, eu gostaria de adicionar saldo à minha conta
   - Tarefas e responsáveis:
     - Implementar tela de adicionar saldo [Pedro]
     - Implementar lógica de adicionar saldo no backend [João Pedro]
-    - Integrar a tela de adicionar/ver saldo com a lógica do backend 
+    - Integrar a tela de adicionar/ver saldo com a lógica do backend [João Vítor]
 
 História #5:  Como usuário, eu gostaria de editar os meus dados de cadastro
   - Tarefas e responsáveis:
@@ -166,19 +168,21 @@ História #7: Como usuário, eu gostaria de favoritar algumas opções de invest
 História #8: Como usuário, eu gostaria de poder realizar algum investimento
   - Tarefas e responsáveis:
     - Adaptar a tela de listagem de investimentos para que seja possível selecionar um e ser redirecionado para uma tela onde seja possível fazer a compra [João Vítor]
+    - Implementar uma tela onde seja possível selecionar o valor que desejar investir [Pedro]
     - Implementar a compra de ativos no banco de dados [Daniel]
-    - Integrar o frontend com a lógica de compra de ativos do backend 
+    - Integrar o frontend com a lógica de compra de ativos do backend [João Vítor]
 
 História #9: Como usuário, eu gostaria de monitorar (acompanhar) meus investimentos
   - Tarefas e responsáveis:
     - Implementar tela que liste os investimentos já feitos [Pedro]
     - Implementar lógica de armazenar no banco de dados os investimentos já feitos [Daniel]
-    - Integrar a tela de “meus investimentos” com a lógica do backend 
+    - Integrar a tela de “meus investimentos” com a lógica do backend [João Vítor]
 
 História #10: Como usuário, eu gostaria de resgatar um investimento feito
   - Tarefas e responsáveis:
     - Adaptar a tela que lista os investimentos já feitos para que seja adicionado uma opção de resgatar o valor 
-    - Implementar lógica no backend que permita o resgate de um investimento 
+    - Implementar uma tela onde seja possível realizar a venda do ativo 
+    - Implementar lógica no backend que permita o resgate de um investimento [Daniel]
     - Integrar essa funcionalidade do frontend com a lógica do backend 
 
 ## Figma
