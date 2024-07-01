@@ -185,6 +185,10 @@ História #10: Como usuário, eu gostaria de resgatar um investimento feito
     - Implementar lógica no backend que permita o resgate de um investimento [Daniel]
     - Integrar essa funcionalidade do frontend com a lógica do backend 
 
+## Diagrama da Arquitetura Hexagonal
+
+![](hex.png)
+
 ## Figma
 
 https://www.figma.com/file/iS09Vu7G3q5LsF4AsvEAku/Untitled?type=design&node-id=0-1&mode=design&t=tt5cWwebhpwton3z-0
