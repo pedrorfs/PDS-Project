@@ -43,7 +43,7 @@ Back-end: Python (Flask), SQLite;
 16. Como usuário, eu gostaria de consultar o valor de criptomoedas
 17. Como usuário, eu gostaria de realizar compras de criptomoedas
 
-## Backlog da Sprint
+## Backlog da Sprint (Prevista)
 
 História #1: Como usuário, eu gostaria de poder criar uma conta
   - Tarefas e responsáveis:
@@ -114,6 +114,72 @@ História #11: Como usuário, eu gostaria de resgatar um investimento feito
     - Adaptar a tela que lista os investimentos já feitos para que seja adicionado uma opção de resgatar o valor [João Vítor]
     - Implementar lógica no backend que permita o resgate de um investimento [João Pedro]
     - Integrar essa funcionalidade do frontend com a lógica do backend [João Vítor]
+
+## Backlog da Sprint (Realizada)
+
+História #1: Como usuário, eu gostaria de poder criar uma conta
+  - Tarefas e responsáveis:
+    - Instalar banco de dados e criar tabela de cadastro [João Pedro]
+    - Criar tela de cadastro [Pedro]
+    - Instalar Flask e node.js [João Pedro]
+    - Implementar lógica de cadastro no backend [João Pedro]
+    - Implementar tela com informações de cadastro do usuário [Pedro]
+
+História #2: Como usuário, eu gostaria de fazer login no sistema
+  - Tarefas e responsáveis:
+    - Criar tela de login [Pedro]
+    - Implementar lógica de login no backend [João Pedro]
+    - Integrar a tela de login com a lógica do backend [João Vítor]
+
+História #3: Como usuário eu gostaria de desfazer o login no sistema
+  - Tarefas e responsáveis:
+    - Implementar primeira versão da tela principal do sistema [Pedro]
+    - Adicionar botão de logout na tela principal [João Vítor]
+    - Implementar lógica de logout no backend [João Pedro]
+    - Integrar o frontend com a lógica de logout do backend [João Vítor]
+
+História #4: Como usuário, eu gostaria de adicionar saldo à minha conta
+  - Tarefas e responsáveis:
+    - Implementar tela de adicionar saldo [Pedro]
+    - Implementar lógica de adicionar saldo no backend [João Pedro]
+    - Integrar a tela de adicionar/ver saldo com a lógica do backend 
+
+História #5:  Como usuário, eu gostaria de editar os meus dados de cadastro
+  - Tarefas e responsáveis:
+    - Adicionar opção de alterar dados da conta na página de perfil do usuário [João Vítor]
+    - Fazer funcionalidade no backend que permita a edição dos dados de um usuário no banco de dados [João Pedro]
+    - Integrar a tela de edição com a lógica do backend [João Vítor]
+
+História #6: Como usuário, eu gostaria de listar as opções de investimento
+  - Tarefas e responsáveis:
+    - Implementar página de pesquisa e listagem de investimentos [João Vítor]
+    - Implementar a funcionalidade que permita o usuário escolher o tipo de investimento que deseja listar (Ações, Renda Fixa, etc.) [João Vítor]
+    - Adicionar integração com a API da bolsa de valores [João Vítor]
+
+História #7: Como usuário, eu gostaria de favoritar algumas opções de investimento
+  - Tarefas e responsáveis:
+    - Adaptar as telas que listam os investimentos para que seja possível clicar em um botão e favoritar um ativo [João Vítor]
+    - Implementar tela que liste os investimentos favoritados [João Vítor]
+    - Implementar no backend a lógica de armazenar os investimentos favoritos [Daniel]
+    - Integrar a tela de listagem dos favoritos e funcionalidade de favoritar com a lógica do backend [João Vítor]
+
+História #8: Como usuário, eu gostaria de poder realizar algum investimento
+  - Tarefas e responsáveis:
+    - Adaptar a tela de listagem de investimentos para que seja possível selecionar um e ser redirecionado para uma tela onde seja possível fazer a compra [João Vítor]
+    - Implementar a compra de ativos no banco de dados [Daniel]
+    - Integrar o frontend com a lógica de compra de ativos do backend 
+
+História #9: Como usuário, eu gostaria de monitorar (acompanhar) meus investimentos
+  - Tarefas e responsáveis:
+    - Implementar tela que liste os investimentos já feitos [Pedro]
+    - Implementar lógica de armazenar no banco de dados os investimentos já feitos [Daniel]
+    - Integrar a tela de “meus investimentos” com a lógica do backend 
+
+História #10: Como usuário, eu gostaria de resgatar um investimento feito
+  - Tarefas e responsáveis:
+    - Adaptar a tela que lista os investimentos já feitos para que seja adicionado uma opção de resgatar o valor 
+    - Implementar lógica no backend que permita o resgate de um investimento 
+    - Integrar essa funcionalidade do frontend com a lógica do backend 
 
 ## Figma
 
