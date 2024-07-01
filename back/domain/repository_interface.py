@@ -33,11 +33,19 @@ class RepositoryInterface(ABC):
         pass
     
     @abstractmethod
+    def remove_favorite_stock(user_id, stock_code):
+        pass
+
+    @abstractmethod
     def add_user_stock(self, user_id, stock, quantity, price):
         pass
 
     @abstractmethod
     def list_user_stocks(self, user_id):
+        pass
+
+    @abstractmethod
+    def sell_user_stock(user_id, stock_code):
         pass
 
 class UserExists(Exception):

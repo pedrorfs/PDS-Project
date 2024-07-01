@@ -120,6 +120,17 @@ class SQLiteAdapter(RepositoryInterface):
                 print(f'Error {err.sqlite_errorcode} - {err.sqlite_errorname}')
                 return None
     
+    def remove_favorite_stock(self, user_id, stock_code):
+        with closing(sqlite3.connect('database.db')) as connection:
+            try:
+                cursor = connection.cursor()
+                cursor.execute('SELECT id FROM stock WHERE code = ?', (stock_code,))
+                stock_id = cursor.fetchone()
+                if stock_id:
+                    cursor.execute('DELETE FROM favorite_stock WHERE user_id = ? AND stock_id = ?', (user_id, stock_id[0]))
+                    connection.commit()
+            except sqlite3.Error as err:
+                print(f'Error {err.sqlite_errorcode} - {err.sqlite_errorname}')
 
     def add_user_stock(self, user_id, stock, quantity, price):
 
@@ -130,6 +141,20 @@ class SQLiteAdapter(RepositoryInterface):
                 cursor.execute('INSERT INTO user_stock (user_id, stock_id, quantity, price) VALUES (?, ?, ?, ?)', 
                     (user_id, stock_id, quantity, price))
                 connection.commit()
+            except sqlite3.Error as err:
+                print(f'Error {err.sqlite_errorcode} - {err.sqlite_errorname}')
+
+    def sell_user_stock(self, user_id, stock_code, quantity):
+        with closing(sqlite3.connect('database.db')) as connection:
+            try:
+                cursor = connection.cursor()
+                cursor.execute('SELECT id FROM stock WHERE code = ?', (stock_code,))
+                stock_id = cursor.fetchone()[0]
+                if stock_id:
+                    cursor.execute('UPDATE user_stock SET quantity = quantity - ? WHERE user_id = ? AND stock_id = ?', (quantity, user_id, stock_id))
+                    connection.commit()
+                    cursor.execute('DELETE FROM user_stock WHERE user_id = ? AND stock_id = ? AND quantity <= 0', (user_id, stock_id))
+                    connection.commit()
             except sqlite3.Error as err:
                 print(f'Error {err.sqlite_errorcode} - {err.sqlite_errorname}')
 
