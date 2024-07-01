@@ -135,7 +135,23 @@ def list_favorites_stocks_route():
         
     except sqlite3.Error as err:
         return jsonify({'msg': f'Error {err.sqlite_errorcode} - {err.sqlite_errorname}'}), 500
-    
+
+@app.route('/api/user/favorite', methods=['DELETE'])
+def delete_favorite_stock_route():
+    user_id = session.get('current_user')
+    if not user_id:
+        return jsonify({'msg': 'Unauthorized request'}), 401
+    try:
+        data = request.json
+        if not 'code' in data:
+            return 'Dados inválidos!', 400
+
+        repository.remove_favorite_stock(user_id, data['code'])
+        return jsonify({"msg": "Success"}), 200
+
+    except sqlite3.Error as err:
+        return jsonify({'msg': f'Error {err.sqlite_errorcode} - {err.sqlite_errorname}'}), 500
+
 @app.route('/api/user/buy', methods=['POST'])
 def add_user_stock_route():
     user_id = session.get('current_user')
@@ -149,12 +165,51 @@ def add_user_stock_route():
         quantity = data['quantity']
         price = data['price']
         stock = Stock(data['code'], data['name'])
+        
+        # Verificar saldo suficiente
+        user = repository.search_user('id', user_id)
+        total_price = quantity * price
+        if user.balance < total_price:
+            return jsonify({"msg": "Saldo insuficiente!"}), 400
+        
+        user.balance -= total_price
         repository.add_user_stock(user_id, stock, quantity, price)
+        repository.add_balance(user)
         return jsonify({"msg": "Success"}), 201
     
     except sqlite3.Error as err:
         return f'Erro {err.sqlite_errorcode} - {err.sqlite_errorname}', 500
 
+@app.route('/api/user/sell', methods=['POST'])
+def sell_user_stock_route():
+    user_id = session.get('current_user')
+    if not user_id:
+        return jsonify({'msg': 'Unauthorized request'}), 401
+    try:
+        data = request.json
+        if not all(k in data for k in ('code', 'quantity')):
+            return jsonify({"msg": "Dados inválidos!"}), 400
+        
+        quantity = data['quantity']
+        stock_code = data['code']
+        
+        # Verificar quantidade suficiente de ações
+        user_stocks = repository.list_user_stocks(user_id)
+        user_stock = next((stock for stock in user_stocks if stock[0] == stock_code), None)
+        if user_stock is None or user_stock[2] < quantity:
+            return jsonify({"msg": "Quantidade de ações insuficiente!"}), 400
+        
+        total_value = quantity * user_stock[3]
+        repository.sell_user_stock(user_id, stock_code, quantity)
+        user = repository.search_user('id', user_id)
+        user.balance += total_value
+        repository.add_balance(user)
+
+        return jsonify({"msg": "Success"}), 200
+    
+    except sqlite3.Error as err:
+        return f'Erro {err.sqlite_errorcode} - {err.sqlite_errorname}', 500
+    
 @app.route('/api/user/buy/list', methods=['GET'])
 def list_user_stocks_route():
     user_id = session.get('current_user')
