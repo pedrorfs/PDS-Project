@@ -45,10 +45,11 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             height: 2.1875rem;
             width: fit-content;
-            padding: 0.625rem;
+            gap: .5rem;
+            padding: .75rem 1rem;
             border-radius: 30px;
             border: none;
             background-color: black;

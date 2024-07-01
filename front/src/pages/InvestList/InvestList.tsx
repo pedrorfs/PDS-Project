@@ -14,6 +14,8 @@ import "./InvestList.scss"
 
 import { apiB3 } from "../../api/config";
 
+import { getFavoriteStocks } from "../../requests/Invest/GetFavorites";
+
 const baseUrl = 'https://brapi.dev/api'
 const apiToken = 'hwKxsC7rtYAkff6xh2mGPF'
 
@@ -27,6 +29,11 @@ interface StockOptionProps {
     stock: string
     type: string
     volume: number
+}
+
+interface FavoriteStock {
+    Code: string
+    Name: string
 }
 
 export function InvestList() {
@@ -48,6 +55,8 @@ export function InvestList() {
 
     const [stocksDisplay, setStocksDisplay] = useState<StockOptionProps[]>([])
 
+    const [myFavoriteStocks, setMyFavoriteStocks] = useState<FavoriteStock[]>([])
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         event.preventDefault()
         setSearchText(event.target.value);
@@ -59,7 +68,7 @@ export function InvestList() {
             return data.stock.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) == 0 || data.name.toLocaleLowerCase().indexOf(searchText.toLocaleLowerCase()) == 0
         }))
 
-        setStocksDisplay(searchApiData.slice(0, 8))
+        setStocksDisplay(searchApiData.slice(0, 12))
     }
 
     const filterFII = () => {
@@ -72,12 +81,12 @@ export function InvestList() {
             console.log(filterFIIData)
 
             if (filterFIIData.length > 0) {
-                setStocksDisplay(filterFIIData.slice(0, 8))
+                setStocksDisplay(filterFIIData.slice(0, 12))
             }
         } else if (isSelectedFII === true) {
             setIsSelectedFII(false)
 
-            setStocksDisplay(apiData.slice(0, 8))
+            setStocksDisplay(apiData.slice(0, 12))
         }
     }
 
@@ -91,12 +100,12 @@ export function InvestList() {
             console.log(filterStockData)
 
             if (filterStockData.length > 0) {
-                setStocksDisplay(filterStockData.slice(0, 8))
+                setStocksDisplay(filterStockData.slice(0, 12))
             }
         } else if (isSelectedStock === true) {
             setIsSelectedStock(false)
 
-            setStocksDisplay(apiData.slice(0, 8))
+            setStocksDisplay(apiData.slice(0, 12))
         }
     }
 
@@ -109,12 +118,12 @@ export function InvestList() {
             setFilterBDRData(apiData.filter(data => (data.type === 'bdr')))
 
             if (filterBDRData.length > 0) {
-                setStocksDisplay(filterBDRData.slice(0, 8))
+                setStocksDisplay(filterBDRData.slice(0, 12))
             }
         } else if (isSelectedETF === true) {
             setIsSelectedETF(false)
 
-            setStocksDisplay(apiData.slice(0, 8))
+            setStocksDisplay(apiData.slice(0, 12))
         }
     }
 
@@ -126,7 +135,7 @@ export function InvestList() {
             const data = response.data.stocks
             setApiData(response.data.stocks)
 
-            setStocksDisplay(data.slice(0, 8))
+            setStocksDisplay(data.slice(0, 12))
             setLoading(false)
         } catch (error) {
             console.log(error)
@@ -139,8 +148,20 @@ export function InvestList() {
         }
 
         searchStocks()
-        
+
     }, [searchText])
+
+    const getFavorites = async () => {
+        const response = await getFavoriteStocks()
+
+        setMyFavoriteStocks(response)
+
+        // console.log('favorites', myFavoriteStocks)
+    }
+
+    useEffect(() => {
+        getFavorites()
+    }, [])
 
     return (
         <div className="list-container">
@@ -197,6 +218,10 @@ export function InvestList() {
                                 stock={stock.stock}
                                 volume={stock.volume}
                                 type={stock.type}
+                                favorite={myFavoriteStocks.find(
+                                    (favorite) => favorite.Code === stock.stock
+                                ) ? true : false}
+
                             />
                         )
                     })}

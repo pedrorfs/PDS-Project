@@ -14,11 +14,16 @@ interface FavoriteStock {
 export function FavoriteStocks() {
 
   const [myFavoriteStocks, setMyFavoriteStocks] = useState<FavoriteStock[]>([])
+  const [loading, setLoading] = useState(false)
 
   const getFavorites = async () => {
+    setLoading(true)
+
     const response = await getFavoriteStocks()
 
     setMyFavoriteStocks(response)
+
+    setLoading(false)
 
     // console.log('favorites', myFavoriteStocks)
   }
@@ -32,6 +37,12 @@ export function FavoriteStocks() {
       <div className="favorite-list-container__content">
         <h1 className="header">Meus Favoritos</h1>
 
+        {loading && (
+          <div className="loading">
+            <h2>Carregando...</h2>
+          </div>
+        )}
+
         <div className="stocks">
           {myFavoriteStocks?.map(stock => {
             return (
@@ -39,7 +50,7 @@ export function FavoriteStocks() {
                 key={stock.Code}
                 name={stock.Name}
                 stock={stock.Code}
-                // type={stock.type}
+              // type={stock.type}
               />
             )
           })}
