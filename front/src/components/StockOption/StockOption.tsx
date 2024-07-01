@@ -6,6 +6,7 @@ import "./StockOption.scss"
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 import { addFavorite } from "../../requests/Invest/AddFavorites";
+import { removeFavorite } from "../../requests/Invest/RemoveFavorites";
 
 interface StockOptionProps {
   change: number
@@ -24,7 +25,7 @@ export function StockOption({ change, close, name, sector, stock, volume, type, 
 
   // const [favorite, setFavorite] = useState(false)
 
-  const handleFavorite = async () => {
+  const handleAddFavorite = async () => {
 
     const data = {
       code: stock,
@@ -32,6 +33,17 @@ export function StockOption({ change, close, name, sector, stock, volume, type, 
     }
 
     const response = await addFavorite(data)
+
+    window.location.reload()
+  }
+
+  const handleRemoveFavorite = async () => {
+
+    const data = {
+      code: stock,
+    }
+
+    const response = await removeFavorite(data)
 
     window.location.reload()
   }
@@ -53,7 +65,7 @@ export function StockOption({ change, close, name, sector, stock, volume, type, 
               cursor: 'pointer'
             }}
             // onClick={() => setFavorite(!favorite)}
-            onClick={() => handleFavorite()}
+            onClick={() => handleRemoveFavorite()}
           />) :
           (<FaRegHeart
             // color="red"
@@ -62,7 +74,7 @@ export function StockOption({ change, close, name, sector, stock, volume, type, 
               cursor: 'pointer'
             }}
             // onClick={() => setFavorite(!favorite)}
-            onClick={() => handleFavorite()}
+            onClick={() => handleAddFavorite()}
           />)}
       </div>
 

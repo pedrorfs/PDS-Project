@@ -5,6 +5,8 @@ import "./FavoriteStockOption.scss"
 
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
+import { removeFavorite } from "../../requests/Invest/RemoveFavorites";
+
 interface StockOptionProps {
   name: string
   stock: string
@@ -16,6 +18,17 @@ export function FavoriteStockOption({ name, stock }: StockOptionProps) {
   const navigate = useNavigate()
 
   const [favorite, setFavorite] = useState(false)
+
+  const handleRemoveFavorite = async () => {
+
+    const data = {
+      code: stock,
+    }
+
+    const response = await removeFavorite(data)
+
+    window.location.reload()
+  }
 
   return (
     <div className="stock-container">
@@ -48,7 +61,7 @@ export function FavoriteStockOption({ name, stock }: StockOptionProps) {
           style={{
             cursor: 'pointer'
           }}
-          onClick={() => setFavorite(!favorite)}
+          onClick={() => handleRemoveFavorite()}
         />
       </div>
     </div>
