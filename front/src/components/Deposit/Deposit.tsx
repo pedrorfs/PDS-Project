@@ -16,7 +16,7 @@ export const Deposit = () => {
 
   const handleSubmit = async () => {
     const data = {
-      balance: parseInt(depositValue) * 100
+      balance: parseInt(depositValue)
     }
 
     const response = await addBalance(data)

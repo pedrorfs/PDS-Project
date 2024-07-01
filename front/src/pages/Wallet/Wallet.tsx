@@ -93,8 +93,8 @@ export function Wallet() {
                 <div className='wallet__my-investments-info__value'>{totalInvestValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</div>
             </div>
             <div className='wallet__yield-info'>
-                <p>Rendimento Total: R$ XXXXX</p>
-                <p>Valor Aplicado: {totalInvestValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
+                {/* <p>Rendimento Total: R$ XXXXX</p> */}
+                {/* <p>Valor Aplicado: {totalInvestValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p> */}
             </div>
 
             <h5 className='wallet__my-assets'>Meus ativos</h5>
