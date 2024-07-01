@@ -54,20 +54,20 @@ export function Topbar() {
                 <div className="topbar__profile__name">
                     <h3>{userName}</h3>
                 </div>
-                <div className="topbar__dropdown"></div>
-                <img
-                    className="topbar__avatar"
-                    src={Avatar} alt=""
-                    ref={menu} onClick={() => setMenuState(!menuState)}
-                />
-                {
-                    menuState &&
-                    <div className="topbar__dropdown__options">
-                        <div 
-                        className="topbar__dropdown__option" onClick={() => navigate('/dados-pessoais')}>Configurações</div>
-                        <div className="topbar__dropdown__option" onClick={() => handleLogout()}>Sair</div>
-                    </div>
-                }
+                <button className="topbar__dropdown" ref={menu} onClick={() => setMenuState(!menuState)}>
+                    <img
+                        className="topbar__avatar"
+                        src={Avatar} alt=""
+                    />
+                    {
+                        menuState &&
+                        <div className="topbar__dropdown__options">
+                            <div 
+                            className="topbar__dropdown__option" onClick={() => navigate('/dados-pessoais')}>Configurações</div>
+                            <div className="topbar__dropdown__option" onClick={() => handleLogout()}>Sair</div>
+                        </div>
+                    }
+                </button>
 
             </div>
         </div>
