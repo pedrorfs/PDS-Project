@@ -178,9 +178,10 @@ História #9: Como usuário, eu gostaria de monitorar (acompanhar) meus investim
     - Implementar lógica de armazenar no banco de dados os investimentos já feitos [Daniel]
     - Integrar a tela de “meus investimentos” com a lógica do backend [João Vítor]
 
-## Diagrama da Arquitetura Hexagonal
+## Documentação da Arquitetura Hexagonal
 
 ![](hex.png)
+O back-end do projeto utiliza uma arquitetura hexagonal como forma de obter separação entre a lógica de negócio e as tecnologias adotadas pelo sistema, aumentando a manutenabilidade e testabilidade do código. A interface web do sistema se comunica com o back-end a partir de uma API REST (adaptador), que por sua vez passa as requisições para uma porta de entrada que provê os serviços necessários dentro do domínio do sistema. Para acesso ao banco de dados, há uma porta de saída que determina a interface que o mecanismo de acesso ao BD deve seguir, que é implementado de forma concreta por um adaptador SQLite.
 
 ## Figma
 
