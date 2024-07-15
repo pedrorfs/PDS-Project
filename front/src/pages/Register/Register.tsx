@@ -57,7 +57,7 @@ export function Register() {
         <div className="register">
             <img className='register__logo' src={Logo} alt="" />
             <p className='register__description'>Abra sua conta</p>
-            <div className='register__input'>
+            <div className='register__input' id="name_input">
                 <label>
                     Nome Completo
                     <input
@@ -68,7 +68,7 @@ export function Register() {
                     />
                 </label>
             </div>
-            <div className='register__input'>
+            <div className='register__input' id="cpf_input">
                 <label>
                     CPF
                     <IMaskInput
@@ -79,7 +79,7 @@ export function Register() {
                     />
                 </label>
             </div>
-            <div className='register__input'>
+            <div className='register__input' id="email_input">
                 <label>
                     Email
                     {/* <IMaskInput
@@ -96,7 +96,7 @@ export function Register() {
                     />
                 </label>
             </div>
-            <div className='register__input'>
+            <div className='register__input' id="password_input">
                 <label>
                     Criar senha
                     <input
@@ -106,7 +106,7 @@ export function Register() {
                     />
                 </label>
             </div>
-            <div className='register__input'>
+            <div className='register__input' id="confirm_password_input">
                 <label>
                     Confirmar senha
                     <input
