@@ -47,7 +47,7 @@ export function Login() {
             </div>
             <div className="login__form">
                 <h3>Acesse sua conta</h3>
-                <div className="login__cpf">
+                <div className="login__cpf" id="cpf_input_login">
                     <label >CPF</label>
                     <IMaskInput
                         mask="000.000.000-00"
@@ -56,7 +56,7 @@ export function Login() {
                         value={cpf}
                     />
                 </div>
-                <div className="login__password">
+                <div className="login__password" id="password_input_login">
                     <label>Senha</label>
                     <input
                         placeholder="Digite sua senha"
