@@ -20,7 +20,7 @@ export function Sidebar() {
                <div className="sidebar__option" onClick={() => navigate("/favoritos")}>
                     <h3>Favoritos</h3>
                </div>
-               <div className="sidebar__option" onClick={() => navigate("/depositar")}>
+               <div className="sidebar__option" id="deposit" onClick={() => navigate("/depositar")}>
                     <h3>Depositar</h3>
                </div>
                {/* <div className="sidebar__option">

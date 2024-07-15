@@ -35,6 +35,17 @@ describe('Teste Cadastro', () => {
     cy.get('.personal-data__button').click()
   })
 
+  it('deposit', () => {
+    cy.get('.initial__content__access-account').click()
+    cy.get('#cpf_input_login').type('33333333333')
+    cy.get('#password_input_login').type('123456')
+    cy.get('.login__button button').click()
+    cy.get('.sidebar #deposit').click()
+    cy.get('.deposit input').type('500')
+    cy.get('.deposit__block').click()
+    // cy.visit('/home')
+  })
+
   it('logout', () => {
     cy.get('.initial__content__access-account').click()
     cy.get('#cpf_input_login').type('33333333333')
@@ -43,4 +54,6 @@ describe('Teste Cadastro', () => {
     cy.get('.topbar__dropdown').click()
     cy.get('.topbar__dropdown__options #topdar_dropdown_option_logout').click()
   })
+
+
 })
