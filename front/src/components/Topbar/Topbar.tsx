@@ -63,8 +63,8 @@ export function Topbar() {
                         menuState &&
                         <div className="topbar__dropdown__options">
                             <div 
-                            className="topbar__dropdown__option" onClick={() => navigate('/dados-pessoais')}>Configurações</div>
-                            <div className="topbar__dropdown__option" onClick={() => handleLogout()}>Sair</div>
+                            className="topbar__dropdown__option" id="topdar_dropdown_option_config" onClick={() => navigate('/dados-pessoais')}>Configurações</div>
+                            <div className="topbar__dropdown__option" id="topdar_dropdown_option_logout" onClick={() => handleLogout()}>Sair</div>
                         </div>
                     }
                 </button>

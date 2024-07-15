@@ -54,6 +54,7 @@ export function PersonalData() {
     setCpf(response.data.cpf)
     setEmail(response.data.email)
     setName(response.data.name)
+    setPassword(response.data.password)
 
   }
 
@@ -64,7 +65,7 @@ export function PersonalData() {
   return (
     <div className='personal-data'>
       <h1 className='personal-data__title'>Meus dados</h1>
-      <div className='personal-data__input'>
+      <div className='personal-data__input' id='name_input'>
         <label>
           Nome Completo
           <input
@@ -103,6 +104,7 @@ export function PersonalData() {
           <input
             type="password"
             onChange={(e: any) => setPassword(e.target.value)}
+            value={password}
           />
         </label>
       </div>
