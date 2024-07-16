@@ -181,6 +181,7 @@ export function BuyStock() {
           <input
             placeholder="Digite o valor que deseja investir"
             type="text"
+            data-cy="input-investment-value"
             onChange={(e: any) => setInvestValue(e.target.value)}
           />
         </div>
@@ -190,7 +191,9 @@ export function BuyStock() {
             <h3>Quantidade estimada</h3>
             <p>{Math.floor(investValue / stockPriceDisplay)} cotas</p>
           </div>
-          <button onClick={() => handleSubmit()}>
+          <button
+            data-cy="confirm-investment"
+            onClick={() => handleSubmit()}>
             {/* <img src={Arrow} alt="Seta" /> */}
             {/* <FaArrowRight style={{
               width: "1rem",

@@ -28,7 +28,7 @@ export function InvestOptions() {
         <h3>Bolsa de Valores</h3>
         <p>Aqui você investe em Fundos Imobiliários (FIIs), ações brasileiras, estrangeiras (BDRs) e fundos de Índice (ETFs).</p>
         <div className="options-container__select-button">
-          <button onClick={() => navigate("/investir/bolsa-de-valores")}>
+          <button data-cy="stock-market" onClick={() => navigate("/investir/bolsa-de-valores")}>
             Acessar
             <img src={Seta} alt="Seta" />
           </button>

@@ -1,7 +1,24 @@
-describe('Teste Cadastro', () => {
+describe('Principais histórias de usuário', () => {
     const nameMock: string = "Joao";
 
     beforeEach(() => {
+        cy.intercept("POST", "/api/user/buy", {
+            statusCode: 200, 
+            body: []
+        }).as('buy-stock');
+
+        cy.intercept("GET", "/api/user/favorites", {
+            statusCode: 200, 
+            body: []
+        }).as('favorites');
+
+        cy.intercept("POST", "/api/user/new", {
+            statusCode: 200, 
+            body: {
+                msg: "User successfully created"
+            }
+        }).as('cadastro');
+
         cy.intercept("POST", "/api/login", {
             statusCode: 200,
             body: {
@@ -11,10 +28,9 @@ describe('Teste Cadastro', () => {
         
         cy.intercept("GET", "/api/user/buy/list", {
             statusCode: 200,
-            body: {
-                name: nameMock,
-                balance: 15007
-            }
+            body: [
+                {'Code': "AMER3", 'Name': "Americanas", 'Quantity': 1, 'Price': 100}
+            ]
         }).as('list');
 
         cy.intercept("GET", "/api/user", {
@@ -36,9 +52,7 @@ describe('Teste Cadastro', () => {
         cy.get('#email_input').type('joaoteste@email.com')
         cy.get('#password_input').type('123456')
         cy.get('#confirm_password_input').type('123456')
-        cy.intercept("POST", "/api/user/new", {
-            statusCode: 200
-        }).as('cadastro');
+        
         cy.get('.register__button').click()
         cy.wait('@cadastro');
     })
@@ -90,6 +104,18 @@ describe('Teste Cadastro', () => {
         cy.get('.login__button button').click()
         cy.get('.topbar__dropdown').click()
         cy.get('.topbar__dropdown__options #topdar_dropdown_option_logout').click()
+    })
+
+    it('buy stock', () => {
+        cy.get('.initial__content__access-account').click()
+        cy.get('#cpf_input_login').type('33333333333')
+        cy.get('#password_input_login').type('123456')
+        cy.get('.login__button button').click()
+        cy.get('[data-cy="sidebar-option__invest"]').click()
+        cy.get('[data-cy="stock-market"]').click()
+        cy.get('[data-cy="buy-stock"]').eq(0).click()
+        cy.get('[data-cy="input-investment-value"]').type(100)
+        cy.get('[data-cy="confirm-investment"]').click()
     })
 
 

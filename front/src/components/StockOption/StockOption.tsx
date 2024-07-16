@@ -55,7 +55,7 @@ export function StockOption({ change, close, name, sector, stock, volume, type, 
         <p>{stock}</p>
       </div>
       <h3 className="stock-container__price">{close.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h3>
-      <div className="buy-fav">
+      <div data-cy="buy-stock" className="buy-fav">
         <h3 onClick={() => navigate(`/investir/bolsa-de-valores/comprar/${stock}`)} className="buyfav__buy">Comprar</h3>
         {favorite ?
           (<FaHeart

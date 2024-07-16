@@ -153,7 +153,6 @@ export function InvestList() {
 
     const getFavorites = async () => {
         const response = await getFavoriteStocks()
-
         setMyFavoriteStocks(response)
 
         // console.log('favorites', myFavoriteStocks)

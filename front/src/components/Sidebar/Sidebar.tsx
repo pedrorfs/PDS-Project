@@ -11,7 +11,7 @@ export function Sidebar() {
                <div className="sidebar__option" onClick={() => navigate("/home")}>
                     <h3>Home</h3>
                </div>
-               <div className="sidebar__option" onClick={() => navigate("/investir")}>
+               <div className="sidebar__option" data-cy="sidebar-option__invest" onClick={() => navigate("/investir")}>
                     <h3>Investir</h3>
                </div>
                <div className="sidebar__option" onClick={() => navigate("/carteira")}>
