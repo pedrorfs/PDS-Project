@@ -14,10 +14,10 @@ export function Sidebar() {
                <div className="sidebar__option" data-cy="sidebar-option__invest" onClick={() => navigate("/investir")}>
                     <h3>Investir</h3>
                </div>
-               <div className="sidebar__option" onClick={() => navigate("/carteira")}>
+               <div className="sidebar__option" data-cy="sidebar-option__wallet" onClick={() => navigate("/carteira")}>
                     <h3>Carteira</h3>
                </div>
-               <div className="sidebar__option" onClick={() => navigate("/favoritos")}>
+               <div className="sidebar__option" data-cy="sidebar-option__favorites" onClick={() => navigate("/favoritos")}>
                     <h3>Favoritos</h3>
                </div>
                <div className="sidebar__option" id="deposit" onClick={() => navigate("/depositar")}>

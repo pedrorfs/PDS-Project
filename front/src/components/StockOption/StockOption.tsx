@@ -72,6 +72,7 @@ export function StockOption({ change, close, name, sector, stock, volume, type, 
             style={{
               cursor: 'pointer'
             }}
+            data-cy="favorite-stock"
             onClick={() => handleAddFavorite()}
           />)}
       </div>
