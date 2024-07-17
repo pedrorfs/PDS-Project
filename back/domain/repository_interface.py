@@ -22,30 +22,31 @@ class RepositoryInterface(ABC):
         pass
 
     @abstractmethod
-    def insert_stock(self, stock):
+    def insert_stock():
         pass
     
     @abstractmethod
-    def list_favorites_stocks(self, user_id):
+    def list_favorites_stocks():
         pass
 
-    def add_favorite_stock(self, user_id, stock):
+    @abstractmethod
+    def add_favorite_stock():
         pass
     
     @abstractmethod
-    def remove_favorite_stock(user_id, stock_code):
+    def remove_favorite_stock():
         pass
 
     @abstractmethod
-    def add_user_stock(self, user_id, stock, quantity, price):
+    def add_user_stock():
         pass
 
     @abstractmethod
-    def list_user_stocks(self, user_id):
+    def list_user_stocks():
         pass
 
     @abstractmethod
-    def sell_user_stock(user_id, stock_code, quantity):
+    def sell_user_stock():
         pass
 
 class UserExists(Exception):

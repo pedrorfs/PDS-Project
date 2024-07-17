@@ -1,20 +1,15 @@
 from flask import request, jsonify, session
 import sqlite3
-from app import app
+
+from app import app, repository
 from services.user_services import *
 from domain.user import User
 from domain.stock import Stock
 from domain.repository_interface import UserExists
 
-from adapters.sqlite_adapter import SQLiteAdapter
-
-repository = SQLiteAdapter()
-
 @app.route('/api/user/new', methods=['POST'])
 def create_user_route():
     try:
-        # TODO: Validate json request data
-        #user = User.schema().loads(request.json)
         user = User(**request.json)
         save_new_user(user, repository)
     except UserExists:
@@ -70,7 +65,6 @@ def update_user_route():
 
     return jsonify({'msg': 'User successfully updated'}), 200
 
-
 @app.route('/api/user/delete', methods=['DELETE'])
 def delete_user_route():
     user_id = session.get('current_user')
@@ -101,10 +95,6 @@ def add_balance_route():
         return({'msg': 'Update failed'}), 500
     
     return jsonify({'msg': 'Balance added to account'}), 200
-
-@app.route('/')
-def index_route():
-    return "Hello World!"
 
 @app.route('/api/user/favorite', methods=['POST', 'PATCH'])
 def add_favorite_stock_route():
@@ -229,3 +219,7 @@ def list_user_stocks_route():
         
     except sqlite3.Error as err:
         return jsonify({'msg': f'Error {err.sqlite_errorcode} - {err.sqlite_errorname}'}), 500
+
+@app.route('/')
+def index_route():
+    return "Hello World!"
