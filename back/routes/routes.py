@@ -120,13 +120,13 @@ def list_favorites_stocks_route():
         return jsonify({'msg': 'Unauthorized request'}), 401
     try:
         favorites = repository.list_favorites_stocks(user_id)
-        response = [{'Code': code, 'Name': name} for code, name in favorites]
-        return response, 200
+        response = [{'Code': item['code'], 'Name': item['name']} for item in favorites]
+        return jsonify({'data': response}), 200
         
     except sqlite3.Error as err:
         return jsonify({'msg': f'Error {err.sqlite_errorcode} - {err.sqlite_errorname}'}), 500
 
-@app.route('/api/user/favorite', methods=['DELETE'])
+@app.route('/api/user/favorite/delete', methods=['DELETE'])
 def delete_favorite_stock_route():
     user_id = session.get('current_user')
     if not user_id:
@@ -134,7 +134,7 @@ def delete_favorite_stock_route():
     try:
         data = request.json
         if not 'code' in data:
-            return 'Dados inválidos!', 400
+            return jsonify('Dados inválidos!'), 400
 
         repository.remove_favorite_stock(user_id, data['code'])
         return jsonify({"msg": "Success"}), 200
@@ -186,18 +186,19 @@ def sell_user_stock_route():
         
         # Verificar quantidade suficiente de ações
         user_stocks = repository.list_user_stocks(user_id)
-        user_stock = next((stock for stock in user_stocks if stock[0] == stock_code), None)
+        #print(user_stocks)
+        user_stock = next((stock for stock in user_stocks if stock['code'] == stock_code), None)
         
-        if user_stock is None or user_stock[2] < quantity:
+        if user_stock is None or user_stock['quantity'] < quantity:
             return jsonify({"msg": "Quantidade de ações insuficiente!"}), 400
         
-        total_value = quantity * int(user_stock[3] * 100)
+        total_value = quantity * int(user_stock['price'] * 100)
         repository.sell_user_stock(user_id, stock_code, quantity)
         user = repository.search_user('id', user_id)
         user.balance += total_value
         repository.add_balance(user)
 
-        total_cost = quantity * user_stock[3]
+        total_cost = quantity * user_stock['price']
         total_sale = quantity * new_price
 
         revenue = total_sale - total_cost
@@ -214,8 +215,8 @@ def list_user_stocks_route():
         return jsonify({'msg': 'Unauthorized request'}), 401
     try:
         stocks = repository.list_user_stocks(user_id)
-        response = [{'Code': code, 'Name': name, 'Quantity': quantity, 'Price': price/100} for code, name, quantity, price in stocks]
-        return response, 200
+        response = [{'Code': stock['code'], 'Name': stock['name'], 'Quantity': stock['quantity'], 'Price': stock['price']/100} for stock in stocks]
+        return jsonify({'data': response}), 200
         
     except sqlite3.Error as err:
         return jsonify({'msg': f'Error {err.sqlite_errorcode} - {err.sqlite_errorname}'}), 500

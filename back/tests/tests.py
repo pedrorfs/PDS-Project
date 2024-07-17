@@ -137,3 +137,64 @@ def test_add_balance(client, set_user, set_login):
     res_data = response.json['data']
     assert response.status_code == 200
     assert res_data['balance'] - data['balance'] == old_balance
+
+def test_add_favorite_stock(client, set_user, set_login):
+    data = {'code': 'AAPL', 'name': 'Apple Inc.'}
+    response = client.post('/api/user/favorite', json=data)
+    assert response.status_code == 201
+
+def test_list_favorites(client, set_user, set_login):
+    data1 = {'code': 'AAPL', 'name': 'Apple Inc.'}
+    data2 = {'code': 'BBB', 'name': 'Big Brother Brasil'}
+    response = client.post('/api/user/favorite', json=data1)
+    response = client.post('/api/user/favorite', json=data2)
+
+    response = client.get('/api/user/favorites')
+    favorites = response.json['data']
+
+    assert response.status_code == 200
+    assert len(favorites) == 2
+    assert favorites[0]['Code'] == 'AAPL'
+    assert favorites[0]['Name'] == 'Apple Inc.'
+    assert favorites[1]['Code'] == 'BBB'
+    assert favorites[1]['Name'] == 'Big Brother Brasil'
+
+def test_delete_favorite_stock(client, set_user, set_login):
+    data = {'code': 'AAPL', 'name': 'Apple Inc.'}
+    response = client.post('/api/user/favorite', json=data)
+
+    response = client.delete('/api/user/favorite/delete', json={'code': 'AAPL'})
+    assert response.status_code == 200
+    
+    response = client.get('/api/user/favorites')
+    favorites = response.json['data']
+    assert len(favorites) == 0
+
+def test_buy_stock(client, set_user, set_login):
+    data = {'code': 'AAPL', 'name': 'Apple Inc.', 'quantity': 5, 'price': 150.0}
+    response = client.post('/api/user/buy', json=data)
+    assert response.status_code == 201
+    #assert 
+
+def test_sell_stock(client, set_user, set_login):
+    data = {'code': 'AAPL', 'name': 'Apple Inc.', 'quantity': 5, 'price': 150.0}
+    client.post('/api/user/buy', json=data)
+    
+    sell_data = {'code': 'AAPL', 'quantity': 2, 'price': 155.0}
+    response = client.post('/api/user/sell', json=sell_data)
+    assert response.status_code == 200
+    #assert response.get_json()['Revenue'] == 10 * 2
+
+def test_list_user_stocks(client, set_user, set_login):
+    data1 = {'code': 'AAPL', 'name': 'Apple Inc.', 'quantity': 5, 'price': 150.0}
+    client.post('/api/user/buy', json=data1)
+    data2 = {'code': 'MSFT', 'name': 'Microsoft Corp.', 'quantity': 3, 'price': 50.0}
+    client.post('/api/user/buy', json=data2)
+    
+    response = client.get('/api/user/buy/list')
+    stocks = response.json['data']
+    print(stocks)
+    assert response.status_code == 200
+    assert len(stocks) == 2
+    assert any(stock['Code'] == 'AAPL' for stock in stocks)
+    assert any(stock['Code'] == 'MSFT' for stock in stocks)

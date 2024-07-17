@@ -134,8 +134,9 @@ class MockDatabase(RepositoryInterface):
                 cursor = connection.cursor()
                 cursor.execute('SELECT id FROM stock WHERE code = ?', (stock_code,))
                 stock_id = cursor.fetchone()
+                print(stock_id)
                 if stock_id:
-                    cursor.execute('DELETE FROM favorite_stock WHERE user_id = ? AND stock_id = ?', (user_id, stock_id[0]))
+                    cursor.execute('DELETE FROM favorite_stock WHERE user_id = ? AND stock_id = ?', (user_id, stock_id['id']))
                     connection.commit()
             except sqlite3.Error as err:
                 print(f'Error {err.sqlite_errorcode} - {err.sqlite_errorname}')
@@ -157,7 +158,7 @@ class MockDatabase(RepositoryInterface):
             try:
                 cursor = connection.cursor()
                 cursor.execute('SELECT id FROM stock WHERE code = ?', (stock_code,))
-                stock_id = cursor.fetchone()[0]
+                stock_id = cursor.fetchone()['id']
                 if stock_id:
                     cursor.execute('UPDATE user_stock SET quantity = quantity - ? WHERE user_id = ? AND stock_id = ?', (quantity, user_id, stock_id))
                     connection.commit()
@@ -177,7 +178,6 @@ class MockDatabase(RepositoryInterface):
                 WHERE user_stock.user_id = ?
                 ''', (user_id,))
                 stocks = cursor.fetchall()
-
                 return stocks
             
             except sqlite3.Error as err:
