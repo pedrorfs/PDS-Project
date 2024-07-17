@@ -177,7 +177,7 @@ def sell_user_stock_route():
         return jsonify({'msg': 'Unauthorized request'}), 401
     try:
         data = request.json
-        if not all(k in data for k in ('code', 'quantity')):
+        if not all(k in data for k in ('code', 'quantity', 'price')):
             return jsonify({"msg": "Dados inválidos!"}), 400
         
         quantity = data['quantity']
@@ -221,6 +221,3 @@ def list_user_stocks_route():
     except sqlite3.Error as err:
         return jsonify({'msg': f'Error {err.sqlite_errorcode} - {err.sqlite_errorname}'}), 500
 
-@app.route('/')
-def index_route():
-    return "Hello World!"

@@ -198,3 +198,29 @@ def test_list_user_stocks(client, set_user, set_login):
     assert len(stocks) == 2
     assert any(stock['Code'] == 'AAPL' for stock in stocks)
     assert any(stock['Code'] == 'MSFT' for stock in stocks)
+
+def test_error_sell_stock(client, set_user, set_login):
+    data = {'code': 'AAPL', 'name': 'Apple Inc.', 'quantity': 5, 'price': 150.0}
+    client.post('/api/user/buy', json=data)
+    
+    sell_data = {'code': 'AAPL', 'quantity': 2}
+    response = client.post('/api/user/sell', json=sell_data)
+    assert response.status_code == 400
+
+def test_error_add_favorite_stock(client, set_user, set_login):
+    data = {'code': 'AAPL'}
+    response = client.post('/api/user/favorite', json=data)
+    assert response.status_code == 400
+
+def test_error_buy_stock(client, set_user, set_login):
+    data = {'code': 'AAPL', 'quantity': 5, 'price': 150.0}
+    response = client.post('/api/user/buy', json=data)
+    assert response.status_code == 400
+    #assert 
+
+def test_error_delete_favorite_stock(client, set_user, set_login):
+    data = {'code': 'AAPL', 'name': 'Apple Inc.'}
+    response = client.post('/api/user/favorite', json=data)
+
+    response = client.delete('/api/user/favorite/delete', json={})
+    assert response.status_code == 400
